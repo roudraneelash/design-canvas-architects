@@ -33,7 +33,7 @@ const Navbar = () => {
     <nav 
       className={cn(
         "fixed w-full z-50 transition-all duration-300 py-4",
-        scrolled ? "bg-white shadow-md py-3" : "bg-transparent"
+        scrolled ? "bg-arch-light shadow-md py-3" : "bg-transparent"
       )}
     >
       <div className="container-custom flex justify-between items-center">
@@ -47,7 +47,7 @@ const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
-              className="text-arch-medium hover:text-arch-dark transition-colors font-medium"
+              className="text-arch-text hover:text-arch-accent1 transition-colors font-medium"
             >
               {link.name}
             </a>
@@ -56,7 +56,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden text-arch-dark"
+          className="md:hidden text-arch-text"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -65,13 +65,13 @@ const Navbar = () => {
 
       {/* Mobile Menu Panel */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-md animate-fade-in">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-arch-light shadow-md animate-fade-in">
           <div className="container-custom py-4 flex flex-col space-y-4">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-arch-medium hover:text-arch-dark transition-colors font-medium py-2"
+                className="text-arch-text hover:text-arch-accent1 transition-colors font-medium py-2"
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}

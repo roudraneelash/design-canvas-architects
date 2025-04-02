@@ -30,12 +30,12 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-medium mb-5">Explore</h4>
             <ul className="space-y-3">
-              <li><a href="#home" className="text-white/70 hover:text-white transition-colors">Home</a></li>
-              <li><a href="#about" className="text-white/70 hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#projects" className="text-white/70 hover:text-white transition-colors">Our Projects</a></li>
-              <li><a href="#services" className="text-white/70 hover:text-white transition-colors">Services</a></li>
-              <li><a href="#team" className="text-white/70 hover:text-white transition-colors">Our Team</a></li>
-              <li><a href="#contact" className="text-white/70 hover:text-white transition-colors">Contact</a></li>
+              <li><a href="#home" className="text-white/70 hover:text-arch-accent1 transition-colors">Home</a></li>
+              <li><a href="#about" className="text-white/70 hover:text-arch-accent1 transition-colors">About Us</a></li>
+              <li><a href="#projects" className="text-white/70 hover:text-arch-accent1 transition-colors">Our Projects</a></li>
+              <li><a href="#services" className="text-white/70 hover:text-arch-accent1 transition-colors">Services</a></li>
+              <li><a href="#team" className="text-white/70 hover:text-arch-accent1 transition-colors">Our Team</a></li>
+              <li><a href="#contact" className="text-white/70 hover:text-arch-accent1 transition-colors">Contact</a></li>
             </ul>
           </div>
           
@@ -61,7 +61,7 @@ const Footer = () => {
                 placeholder="Your email address" 
                 className="flex-grow px-4 py-2 bg-white/10 focus:bg-white/20 border border-white/20 rounded-l-sm text-white placeholder:text-white/50 focus:outline-none"
               />
-              <button className="px-4 py-2 bg-white text-arch-dark font-medium rounded-r-sm hover:bg-arch-accent transition-colors">
+              <button className="px-4 py-2 bg-arch-accent1 text-white font-medium rounded-r-sm hover:bg-arch-accent2 transition-colors">
                 Subscribe
               </button>
             </form>
@@ -73,9 +73,9 @@ const Footer = () => {
             © {new Date().getFullYear()} Design Canvas Architects. All rights reserved.
           </p>
           <div className="flex space-x-6">
-            <a href="#" className="text-white/70 hover:text-white transition-colors text-sm">Privacy Policy</a>
-            <a href="#" className="text-white/70 hover:text-white transition-colors text-sm">Terms of Service</a>
-            <a href="#" className="text-white/70 hover:text-white transition-colors text-sm">Careers</a>
+            <a href="#" className="text-white/70 hover:text-arch-accent1 transition-colors text-sm">Privacy Policy</a>
+            <a href="#" className="text-white/70 hover:text-arch-accent1 transition-colors text-sm">Terms of Service</a>
+            <a href="#" className="text-white/70 hover:text-arch-accent1 transition-colors text-sm">Careers</a>
           </div>
         </div>
       </div>

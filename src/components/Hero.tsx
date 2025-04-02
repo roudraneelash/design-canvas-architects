@@ -30,8 +30,8 @@ const Hero = () => {
           <a 
             href="#projects" 
             className={cn(
-              "px-8 py-3 bg-white text-arch-dark font-medium rounded-sm",
-              "hover:bg-arch-dark hover:text-white transition-colors duration-300"
+              "px-8 py-3 bg-arch-accent1 text-white font-medium rounded-sm",
+              "hover:bg-arch-accent2 transition-colors duration-300"
             )}
           >
             View Our Work

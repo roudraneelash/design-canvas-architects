@@ -71,8 +71,12 @@ export default {
 				arch: {
 					'dark': '#1A1A1A',
 					'medium': '#4A4A4A',
-					'light': '#F5F5F5',
-					'accent': '#BDBDBD',
+					'light': '#F5F5F5', // Primary Background
+					'secondary': '#F0E8D9', // Secondary Background
+					'text': '#A9A9A9', // Text Color
+					'accent1': '#A8C686', // Accent Color 1
+					'accent2': '#B7C9A3', // Accent Color 2
+					'accent3': '#D3D3D3', // Accent Color 3
 				}
 			},
 			borderRadius: {
