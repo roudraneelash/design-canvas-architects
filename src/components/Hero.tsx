@@ -61,7 +61,8 @@ const Hero = () => {
       {/* Content */}
       <div className="absolute inset-0 flex flex-col justify-center items-start px-6 md:px-24 z-10">
         <div className="max-w-3xl">
-          <div className="relative overflow-hidden h-24 mb-6">
+          {/* Title with increased height for more space */}
+          <div className="relative overflow-hidden h-28 md:h-32 mb-10">
             {heroSlides.map((slide, index) => (
               <h1 
                 key={index}
@@ -77,7 +78,8 @@ const Hero = () => {
             ))}
           </div>
           
-          <div className="relative overflow-hidden h-20 mb-8">
+          {/* Subtitle with increased height and margin */}
+          <div className="relative overflow-hidden h-24 mb-12">
             {heroSlides.map((slide, index) => (
               <p 
                 key={index}
@@ -93,7 +95,8 @@ const Hero = () => {
             ))}
           </div>
           
-          <div className="space-x-4 flex items-center">
+          {/* Buttons with increased top margin */}
+          <div className="space-x-4 flex items-center mt-4">
             <a 
               href="#projects" 
               className={cn(
@@ -114,14 +117,14 @@ const Hero = () => {
           </div>
         </div>
         
-        {/* Slide Indicators */}
-        <div className="absolute bottom-10 left-6 md:left-24 flex space-x-2">
+        {/* Slide Indicators - increased bottom margin */}
+        <div className="absolute bottom-16 left-6 md:left-24 flex space-x-3">
           {heroSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
               className={cn(
-                "w-10 h-1 rounded-none transition-all duration-300",
+                "w-12 h-1 rounded-none transition-all duration-300",
                 index === currentSlide ? "bg-arch-accent1" : "bg-white/30"
               )}
               aria-label={`Go to slide ${index + 1}`}
@@ -129,10 +132,10 @@ const Hero = () => {
           ))}
         </div>
         
-        {/* Scroll Down */}
-        <div className="absolute bottom-10 right-6 md:right-24 flex flex-col items-center">
+        {/* Scroll Down - increased bottom margin */}
+        <div className="absolute bottom-16 right-6 md:right-24 flex flex-col items-center">
           <a href="#about" className="text-white/80 group flex flex-col items-center">
-            <span className="text-sm mb-2 group-hover:text-arch-accent1 transition-colors">Scroll</span>
+            <span className="text-sm mb-3 group-hover:text-arch-accent1 transition-colors">Scroll</span>
             <ArrowDown size={20} className="animate-bounce" />
           </a>
         </div>
