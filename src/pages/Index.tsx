@@ -11,7 +11,7 @@ import Footer from '@/components/Footer';
 
 const Index = () => {
   useEffect(() => {
-    // Simple animation on scroll functionality
+    // Enhanced animation on scroll functionality
     const animateElements = () => {
       const elements = document.querySelectorAll('.animate-on-scroll');
       
@@ -28,11 +28,24 @@ const Index = () => {
     // Initialize animations
     animateElements();
     
-    // Add scroll event listener
-    window.addEventListener('scroll', animateElements);
+    // Add scroll event listener with throttling
+    let scrollTimeout: number;
+    const handleScroll = () => {
+      if (!scrollTimeout) {
+        scrollTimeout = window.setTimeout(() => {
+          scrollTimeout = 0;
+          animateElements();
+        }, 50);
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
     
     // Clean up
-    return () => window.removeEventListener('scroll', animateElements);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeout) window.clearTimeout(scrollTimeout);
+    };
   }, []);
 
   return (
