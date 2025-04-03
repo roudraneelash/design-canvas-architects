@@ -3,11 +3,14 @@ import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { ArrowRight } from 'lucide-react';
 
 type ProjectCategory = 'all' | 'residential' | 'interior' | 'religious' | 'commercial' | 'healthcare';
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>('all');
+  const [currentPage, setCurrentPage] = useState(1);
+  const projectsPerPage = 6;
 
   const categories: { id: ProjectCategory; label: string }[] = [
     { id: 'all', label: 'All Projects' },
@@ -51,9 +54,23 @@ const Projects = () => {
     ],
   };
 
+  const allProjects = Object.values(projects).flat();
+  
   const filteredProjects = activeCategory === 'all'
-    ? Object.values(projects).flat()
+    ? allProjects
     : projects[activeCategory] || [];
+
+  // Pagination
+  const indexOfLastProject = currentPage * projectsPerPage;
+  const indexOfFirstProject = indexOfLastProject - projectsPerPage;
+  const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
+  const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
+
+  // Reset to page 1 when changing categories
+  const handleCategoryChange = (category: ProjectCategory) => {
+    setActiveCategory(category);
+    setCurrentPage(1);
+  };
 
   // Stats for achievements section
   const stats = [
@@ -64,29 +81,30 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="section-padding bg-arch-light">
+    <section id="projects" className="section-padding bg-mono-light">
       <div className="container-custom">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-arch-dark mb-4">Our Projects</h2>
-          <p className="text-arch-text max-w-3xl mx-auto">
+        <div className="text-center mb-12 animate-fade-in">
+          <h2 className="text-4xl font-light text-mono-dark mb-4 font-serif">Our Projects</h2>
+          <p className="text-mono-medium max-w-3xl mx-auto font-light">
             Explore our diverse portfolio of architectural projects spanning residential, commercial, 
             healthcare, and more, each designed with precision and creativity.
           </p>
         </div>
 
         {/* Project Categories Filter */}
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
-          {categories.map((category) => (
+        <div className="flex flex-wrap justify-center gap-3 mb-10 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          {categories.map((category, index) => (
             <Button
               key={category.id}
               variant="outline"
               className={cn(
-                "border-arch-accent3 hover:border-arch-accent1",
+                "border-mono-accent hover:border-mono-dark font-serif font-light",
                 activeCategory === category.id
-                  ? "bg-arch-accent1 text-white border-arch-accent1"
-                  : "bg-transparent text-arch-medium"
+                  ? "bg-mono-dark text-white border-mono-dark"
+                  : "bg-transparent text-mono-medium"
               )}
-              onClick={() => setActiveCategory(category.id)}
+              onClick={() => handleCategoryChange(category.id)}
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
               {category.label}
             </Button>
@@ -95,10 +113,10 @@ const Projects = () => {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project, index) => (
+          {currentProjects.map((project, index) => (
             <div 
               key={index} 
-              className="project-card group rounded-sm overflow-hidden shadow-md animate-on-scroll"
+              className="project-card group rounded-none overflow-hidden shadow-md animate-on-scroll"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="relative h-64 overflow-hidden">
@@ -109,31 +127,52 @@ const Projects = () => {
                 />
                 <div className="project-card-overlay">
                   <div className="text-center px-4">
-                    <h3 className="text-xl font-semibold text-white mb-2">{project.name}</h3>
-                    <p className="text-white/80">{project.location}</p>
-                    <button className="mt-4 px-6 py-2 bg-arch-accent1 text-white rounded-sm hover:bg-arch-accent2 transition-colors">
+                    <h3 className="text-xl font-light text-white mb-2 font-serif">{project.name}</h3>
+                    <p className="text-white/80 font-light">{project.location}</p>
+                    <button className="mt-4 px-6 py-2 bg-white text-mono-dark rounded-none hover:bg-gray-200 transition-colors font-serif font-light flex items-center mx-auto">
                       View Details
+                      <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
                     </button>
                   </div>
                 </div>
               </div>
               <div className="p-4 bg-white">
-                <h3 className="font-medium text-arch-dark truncate">{project.name}</h3>
-                <p className="text-arch-text text-sm">{project.location}</p>
+                <h3 className="font-light text-mono-dark truncate font-serif">{project.name}</h3>
+                <p className="text-mono-medium text-sm">{project.location}</p>
               </div>
             </div>
           ))}
         </div>
         
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex justify-center mt-10 space-x-2 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={cn(
+                  "w-10 h-10 flex items-center justify-center rounded-none border",
+                  currentPage === page 
+                    ? "bg-mono-dark text-white border-mono-dark" 
+                    : "border-mono-accent text-mono-medium hover:bg-mono-light"
+                )}
+              >
+                {page}
+              </button>
+            ))}
+          </div>
+        )}
+        
         {/* Achievements/Stats Section */}
         <div className="mt-24 mb-10">
-          <h2 className="text-3xl font-bold text-arch-dark text-center mb-12">Our Achievements</h2>
+          <h2 className="text-3xl font-light text-mono-dark text-center mb-12 font-serif animate-fade-in">Our Achievements</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
-              <Card key={index} className="border-arch-accent3 bg-white animate-on-scroll" style={{ animationDelay: `${index * 0.1}s` }}>
+              <Card key={index} className="border-mono-accent bg-white animate-on-scroll rounded-none" style={{ animationDelay: `${index * 0.1}s` }}>
                 <CardContent className="p-6 text-center">
-                  <p className="text-4xl font-bold text-arch-accent1 mb-2">{stat.value}</p>
-                  <p className="text-arch-text uppercase tracking-wider text-sm">{stat.label}</p>
+                  <p className="text-4xl font-light text-mono-dark mb-2 font-serif">{stat.value}</p>
+                  <p className="text-mono-medium uppercase tracking-wider text-sm font-light">{stat.label}</p>
                 </CardContent>
               </Card>
             ))}

@@ -80,12 +80,24 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="section-padding bg-arch-dark text-white">
-      <div className="container-custom">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-semibold mb-4">Our Services</h2>
-          <div className="w-20 h-1 bg-white/30 mx-auto mb-6" />
-          <p className="text-white/80 text-lg">
+    <section id="services" className="section-padding relative">
+      {/* Background Image with Overlay */}
+      <div 
+        className="absolute inset-0 w-full h-full" 
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1631679706909-1844bbd07221?auto=format&fit=crop&w=2000&q=80')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+          filter: "brightness(0.15)"
+        }}
+      />
+      
+      <div className="container-custom relative z-10">
+        <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
+          <h2 className="text-3xl md:text-4xl font-light mb-4 text-white font-serif">Our Services</h2>
+          <div className="w-20 h-[1px] bg-white/30 mx-auto mb-6" />
+          <p className="text-white/80 text-lg font-light">
             We offer a comprehensive range of architectural and design services to bring your vision to life.
           </p>
         </div>
@@ -94,22 +106,23 @@ const Services = () => {
           {services.map((service, index) => (
             <div 
               key={index} 
-              className="p-8 bg-white/5 border border-white/10 rounded-sm text-center hover:bg-white/10 transition-colors"
+              className="p-8 bg-black/40 border border-white/10 rounded-none text-center hover:bg-black/60 transition-all duration-300 transform hover:-translate-y-1 animate-on-scroll"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="text-white/90">
                 {service.icon}
               </div>
-              <h3 className="text-xl font-medium mb-3">{service.title}</h3>
-              <p className="text-white/70">{service.description}</p>
+              <h3 className="text-xl font-light mb-3 text-white font-serif">{service.title}</h3>
+              <p className="text-white/70 font-light">{service.description}</p>
             </div>
           ))}
         </div>
         
-        <div className="mt-20 text-center">
-          <h3 className="text-2xl font-medium mb-6">Ready to Start Your Project?</h3>
+        <div className="mt-20 text-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
+          <h3 className="text-2xl font-light mb-6 text-white font-serif">Ready to Start Your Project?</h3>
           <a 
             href="#contact" 
-            className="inline-block px-8 py-3 bg-white text-arch-dark font-medium rounded-sm hover:bg-arch-accent transition-colors"
+            className="inline-block px-8 py-3 bg-white text-black font-light rounded-none hover:bg-gray-300 transition-all duration-300 font-serif"
           >
             Get in Touch
           </a>

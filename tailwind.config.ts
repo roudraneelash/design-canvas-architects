@@ -22,6 +22,7 @@ export default {
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
 				display: ['Montserrat', 'sans-serif'],
+				serif: ['Playfair Display', 'serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -67,16 +68,13 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Custom architecture theme colors
-				arch: {
-					'dark': '#1A1A1A',
-					'medium': '#4A4A4A',
-					'light': '#F5F5F5', // Primary Background
-					'secondary': '#F0E8D9', // Secondary Background
-					'text': '#A9A9A9', // Text Color
-					'accent1': '#A8C686', // Accent Color 1
-					'accent2': '#B7C9A3', // Accent Color 2
-					'accent3': '#D3D3D3', // Accent Color 3
+				// Monochrome theme
+				mono: {
+					'dark': '#222222',
+					'medium': '#555555',
+					'light': '#F1F1F1',
+					'text': '#333333',
+					'accent': '#888888',
 				}
 			},
 			borderRadius: {
