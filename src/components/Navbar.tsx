@@ -33,12 +33,14 @@ const Navbar = () => {
     <nav 
       className={cn(
         "fixed w-full z-50 transition-all duration-300 py-4",
-        scrolled ? "bg-mono-light shadow-md py-3" : "bg-mono-dark/80 backdrop-blur-md"
+        scrolled 
+          ? "bg-white shadow-md py-3" 
+          : "bg-transparent"
       )}
     >
       <div className="container-custom flex justify-between items-center">
         <a href="#home" className={cn(
-          "font-display text-2xl font-light tracking-wider",
+          "font-serif text-2xl font-light tracking-wider",
           scrolled ? "text-mono-dark" : "text-white"
         )}>
           DESIGN CANVAS
@@ -52,7 +54,7 @@ const Navbar = () => {
               href={link.href}
               className={cn(
                 "font-serif text-sm font-light tracking-wider transition-colors",
-                scrolled ? "text-mono-text hover:text-mono-accent" : "text-white/90 hover:text-white"
+                scrolled ? "text-mono-text hover:text-mono-accent" : "text-white hover:text-white/70"
               )}
             >
               {link.name}
@@ -74,7 +76,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Panel */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-mono-light shadow-md animate-fade-in">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-md animate-fade-in">
           <div className="container-custom py-4 flex flex-col space-y-4">
             {navLinks.map((link) => (
               <a

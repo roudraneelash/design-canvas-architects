@@ -9,8 +9,6 @@ type ProjectCategory = 'all' | 'residential' | 'interior' | 'religious' | 'comme
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>('all');
-  const [currentPage, setCurrentPage] = useState(1);
-  const projectsPerPage = 6;
 
   const categories: { id: ProjectCategory; label: string }[] = [
     { id: 'all', label: 'All Projects' },
@@ -57,20 +55,8 @@ const Projects = () => {
   const allProjects = Object.values(projects).flat();
   
   const filteredProjects = activeCategory === 'all'
-    ? allProjects
-    : projects[activeCategory] || [];
-
-  // Pagination
-  const indexOfLastProject = currentPage * projectsPerPage;
-  const indexOfFirstProject = indexOfLastProject - projectsPerPage;
-  const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
-  const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
-
-  // Reset to page 1 when changing categories
-  const handleCategoryChange = (category: ProjectCategory) => {
-    setActiveCategory(category);
-    setCurrentPage(1);
-  };
+    ? allProjects.slice(0, 6)
+    : projects[activeCategory]?.slice(0, 6) || [];
 
   // Stats for achievements section
   const stats = [
@@ -103,7 +89,7 @@ const Projects = () => {
                   ? "bg-mono-dark text-white border-mono-dark"
                   : "bg-transparent text-mono-medium"
               )}
-              onClick={() => handleCategoryChange(category.id)}
+              onClick={() => setActiveCategory(category.id)}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {category.label}
@@ -113,7 +99,7 @@ const Projects = () => {
 
         {/* Portfolio Grid - Gallery Style */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {currentProjects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <div 
               key={index} 
               className="animate-on-scroll group relative overflow-hidden"
@@ -145,37 +131,26 @@ const Projects = () => {
           ))}
         </div>
         
-        {/* Pagination Controls */}
-        {totalPages > 1 && (
-          <div className="flex justify-center mt-10 space-x-2 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <button
-                key={page}
-                onClick={() => setCurrentPage(page)}
-                className={cn(
-                  "w-10 h-10 flex items-center justify-center rounded-none border font-serif font-light",
-                  currentPage === page 
-                    ? "bg-mono-dark text-white border-mono-dark" 
-                    : "border-mono-accent text-mono-medium hover:bg-mono-light"
-                )}
-              >
-                {page}
-              </button>
-            ))}
-          </div>
-        )}
+        {/* View All Projects Button */}
+        <div className="flex justify-center mt-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+          <a 
+            href="#" 
+            className="group inline-flex items-center px-8 py-3 bg-mono-dark text-white font-light font-serif hover:bg-mono-medium transition-colors duration-300"
+          >
+            View All Projects
+            <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+          </a>
+        </div>
         
         {/* Achievements/Stats Section */}
-        <div className="mt-24 mb-8">
-          <h2 className="text-3xl font-light text-mono-dark text-center mb-12 font-serif animate-fade-in">Our Achievements</h2>
+        <div className="mt-24 mb-8 p-12 bg-mono-dark text-white">
+          <h2 className="text-3xl font-light text-white text-center mb-12 font-serif animate-fade-in">Our Achievements</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
-              <Card key={index} className="border-mono-accent bg-white animate-on-scroll rounded-none shadow-sm" style={{ animationDelay: `${index * 0.1}s` }}>
-                <CardContent className="p-6 text-center">
-                  <p className="text-4xl font-light text-mono-dark mb-2 font-serif">{stat.value}</p>
-                  <p className="text-mono-medium uppercase tracking-wider text-sm font-light font-serif">{stat.label}</p>
-                </CardContent>
-              </Card>
+              <div key={index} className="animate-on-scroll text-center" style={{ animationDelay: `${index * 0.1}s` }}>
+                <p className="text-4xl font-light text-white mb-2 font-serif">{stat.value}</p>
+                <p className="text-white/80 uppercase tracking-wider text-sm font-light font-serif">{stat.label}</p>
+              </div>
             ))}
           </div>
         </div>
