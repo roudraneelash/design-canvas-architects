@@ -1,63 +1,91 @@
 
 import React from 'react';
+import { cn } from '@/lib/utils';
+import { ArrowRight } from 'lucide-react';
 
 const About = () => {
   return (
-    <section id="about" className="section-padding bg-arch-secondary">
+    <section id="about" className="section-padding bg-mono-light">
       <div className="container-custom">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-semibold mb-4 text-arch-dark">Our Approach</h2>
-          <div className="w-20 h-1 bg-arch-accent1 mx-auto mb-6" />
-          <p className="text-arch-text text-lg">
+        <div className="max-w-3xl mx-auto text-center mb-16 animate-on-scroll">
+          <h2 className="text-3xl md:text-4xl font-serif font-light mb-4 text-mono-dark">Our Approach</h2>
+          <div className="w-20 h-[1px] bg-mono-accent mx-auto mb-6" />
+          <p className="text-mono-medium text-lg font-serif">
             Design Canvas Architects was founded on the belief that architecture should serve both people and the planet. 
             With a commitment to sustainable design and innovative solutions, we create spaces that enhance lives and respect the environment.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="bg-arch-light p-8 shadow-sm">
-            <h3 className="text-xl font-medium mb-4 text-arch-dark">Design Philosophy</h3>
-            <p className="text-arch-text">
-              We believe in the power of thoughtful design to transform everyday experiences. 
-              Our approach balances aesthetics, functionality, and sustainability to create spaces that inspire and endure.
-            </p>
-          </div>
-
-          <div className="bg-arch-light p-8 shadow-sm">
-            <h3 className="text-xl font-medium mb-4 text-arch-dark">Sustainability</h3>
-            <p className="text-arch-text">
-              Environmental responsibility is at the core of every project. We integrate sustainable practices and materials 
-              to minimize ecological impact while maximizing energy efficiency and occupant wellbeing.
-            </p>
-          </div>
-
-          <div className="bg-arch-light p-8 shadow-sm">
-            <h3 className="text-xl font-medium mb-4 text-arch-dark">Collaboration</h3>
-            <p className="text-arch-text">
-              We view architecture as a collaborative art. By working closely with clients, engineers, contractors, and communities, 
-              we ensure that each project meets the diverse needs of all stakeholders.
-            </p>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+          {[
+            {
+              title: "Design Philosophy",
+              text: "We believe in the power of thoughtful design to transform everyday experiences. Our approach balances aesthetics, functionality, and sustainability.",
+              image: "https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&w=800&q=80",
+              color: "text-[#9b87f5]",
+              delay: 0
+            },
+            {
+              title: "Sustainability",
+              text: "Environmental responsibility is at the core of every project. We integrate sustainable practices and materials to minimize ecological impact.",
+              image: "https://images.unsplash.com/photo-1481026469463-66327c86e544?auto=format&fit=crop&w=800&q=80",
+              color: "text-[#6E59A5]",
+              delay: 0.1
+            },
+            {
+              title: "Collaboration",
+              text: "We view architecture as a collaborative art. By working closely with clients, engineers, and communities, we ensure projects meet all stakeholders' needs.",
+              image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80",
+              color: "text-[#7E69AB]",
+              delay: 0.2
+            }
+          ].map((item, index) => (
+            <div 
+              key={index} 
+              className="animate-on-scroll overflow-hidden group"
+              style={{ animationDelay: `${item.delay}s` }}
+            >
+              <div className="relative h-64 overflow-hidden mb-4">
+                <img 
+                  src={item.image} 
+                  alt={item.title} 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-mono-dark/30 group-hover:bg-mono-dark/20 transition-all duration-300"></div>
+              </div>
+              <h3 className={cn("text-xl font-light mb-3 font-serif", item.color)}>{item.title}</h3>
+              <p className="text-mono-text font-serif font-light">{item.text}</p>
+            </div>
+          ))}
         </div>
 
-        <div className="mt-20 flex flex-col md:flex-row gap-10 items-center">
-          <div className="md:w-1/2">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-arch-dark">Our Story</h2>
-            <p className="text-arch-text mb-4">
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="animate-on-scroll md:order-2">
+            <div className="relative overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?auto=format&fit=crop&w=1200&q=80" 
+                alt="Architecture studio" 
+                className="w-full h-auto object-cover"
+              />
+              <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-mono-dark/80 to-transparent"></div>
+            </div>
+          </div>
+          
+          <div className="animate-on-scroll md:order-1" style={{ animationDelay: "0.15s" }}>
+            <h2 className="text-3xl md:text-4xl font-light mb-6 text-mono-dark font-serif">Our Story</h2>
+            <div className="w-20 h-[1px] bg-mono-accent mb-6"></div>
+            <p className="text-mono-text mb-4 font-serif font-light">
               Founded in 2005 by a collective of forward-thinking architects, Design Canvas emerged from a shared vision to challenge conventional approaches to the built environment. 
               We've since grown into a dynamic studio of architects, designers, and planners united by a passion for creating meaningful spaces.
             </p>
-            <p className="text-arch-text">
+            <p className="text-mono-text mb-6 font-serif font-light">
               Over the years, we've cultivated a diverse portfolio spanning residential, commercial, cultural, and public projects. 
               Each design reflects our commitment to innovation, sustainability, and the unique contexts in which our buildings exist.
             </p>
-          </div>
-          <div className="md:w-1/2">
-            <img 
-              src="https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&w=1200&q=80" 
-              alt="Architecture studio" 
-              className="w-full h-auto object-cover rounded-sm shadow-md"
-            />
+            <a href="#projects" className="inline-flex items-center font-serif font-light text-mono-dark hover:text-[#9b87f5] transition-colors group">
+              Explore our work
+              <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
+            </a>
           </div>
         </div>
       </div>

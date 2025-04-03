@@ -21,15 +21,15 @@ const Hero = () => {
       {/* Content */}
       <div className="absolute inset-0 flex flex-col justify-center items-start px-6 md:px-24 z-10">
         <div className="max-w-3xl animate-fade-in">
-          <h1 className="text-5xl md:text-7xl font-light text-white tracking-tight font-serif mb-6">
+          <h1 className="text-5xl md:text-7xl font-light text-white tracking-tight font-serif mb-8">
             DESIGN CANVAS ARCHITECTS
           </h1>
           
-          <p className="text-xl md:text-2xl text-white/90 font-extralight font-serif mb-10">
+          <p className="text-xl md:text-2xl text-white/90 font-extralight font-serif mb-12">
             Creating exceptional spaces that inspire, endure, and transform.
           </p>
           
-          <div className="space-x-4 flex items-center">
+          <div className="space-x-4 flex items-center mt-4">
             <a 
               href="#projects" 
               className={cn(

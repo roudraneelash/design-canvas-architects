@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Eye, ExternalLink } from 'lucide-react';
 
 type ProjectCategory = 'all' | 'residential' | 'interior' | 'religious' | 'commercial' | 'healthcare';
 
@@ -84,9 +84,9 @@ const Projects = () => {
     <section id="projects" className="section-padding bg-mono-light">
       <div className="container-custom">
         <div className="text-center mb-12 animate-fade-in">
-          <h2 className="text-4xl font-light text-mono-dark mb-4 font-serif">Our Projects</h2>
-          <p className="text-mono-medium max-w-3xl mx-auto font-light">
-            Explore our diverse portfolio of architectural projects spanning residential, commercial, 
+          <h2 className="text-4xl font-light text-mono-dark mb-4 font-serif">Our Portfolio</h2>
+          <p className="text-mono-medium max-w-3xl mx-auto font-light font-serif">
+            Explore our diverse collection of architectural projects spanning residential, commercial, 
             healthcare, and more, each designed with precision and creativity.
           </p>
         </div>
@@ -111,34 +111,35 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Portfolio Grid - Gallery Style */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {currentProjects.map((project, index) => (
             <div 
               key={index} 
-              className="project-card group rounded-none overflow-hidden shadow-md animate-on-scroll"
+              className="animate-on-scroll group relative overflow-hidden"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="relative h-64 overflow-hidden">
+              <div className="aspect-[4/3] overflow-hidden">
                 <img 
                   src={project.image} 
                   alt={project.name} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="project-card-overlay">
-                  <div className="text-center px-4">
-                    <h3 className="text-xl font-light text-white mb-2 font-serif">{project.name}</h3>
-                    <p className="text-white/80 font-light">{project.location}</p>
-                    <button className="mt-4 px-6 py-2 bg-white text-mono-dark rounded-none hover:bg-gray-200 transition-colors font-serif font-light flex items-center mx-auto">
-                      View Details
-                      <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
-                    </button>
-                  </div>
-                </div>
               </div>
-              <div className="p-4 bg-white">
-                <h3 className="font-light text-mono-dark truncate font-serif">{project.name}</h3>
-                <p className="text-mono-medium text-sm">{project.location}</p>
+              
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-mono-dark/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <h3 className="text-xl font-light text-white mb-1 font-serif transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">{project.name}</h3>
+                <p className="text-white/80 font-light font-serif mb-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">{project.location}</p>
+                
+                <div className="flex space-x-4 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-150">
+                  <a href="#" className="flex items-center text-white hover:text-gray-300 transition-colors font-serif text-sm font-light">
+                    <Eye size={16} className="mr-1" /> View Project
+                  </a>
+                  <a href="#" className="flex items-center text-white hover:text-gray-300 transition-colors font-serif text-sm font-light">
+                    <ExternalLink size={16} className="mr-1" /> Details
+                  </a>
+                </div>
               </div>
             </div>
           ))}
@@ -152,7 +153,7 @@ const Projects = () => {
                 key={page}
                 onClick={() => setCurrentPage(page)}
                 className={cn(
-                  "w-10 h-10 flex items-center justify-center rounded-none border",
+                  "w-10 h-10 flex items-center justify-center rounded-none border font-serif font-light",
                   currentPage === page 
                     ? "bg-mono-dark text-white border-mono-dark" 
                     : "border-mono-accent text-mono-medium hover:bg-mono-light"
@@ -165,14 +166,14 @@ const Projects = () => {
         )}
         
         {/* Achievements/Stats Section */}
-        <div className="mt-24 mb-10">
+        <div className="mt-24 mb-8">
           <h2 className="text-3xl font-light text-mono-dark text-center mb-12 font-serif animate-fade-in">Our Achievements</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
-              <Card key={index} className="border-mono-accent bg-white animate-on-scroll rounded-none" style={{ animationDelay: `${index * 0.1}s` }}>
+              <Card key={index} className="border-mono-accent bg-white animate-on-scroll rounded-none shadow-sm" style={{ animationDelay: `${index * 0.1}s` }}>
                 <CardContent className="p-6 text-center">
                   <p className="text-4xl font-light text-mono-dark mb-2 font-serif">{stat.value}</p>
-                  <p className="text-mono-medium uppercase tracking-wider text-sm font-light">{stat.label}</p>
+                  <p className="text-mono-medium uppercase tracking-wider text-sm font-light font-serif">{stat.label}</p>
                 </CardContent>
               </Card>
             ))}
