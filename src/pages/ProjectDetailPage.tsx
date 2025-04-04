@@ -38,7 +38,7 @@ const projectsData = [
     year: '2021',
     client: 'Private',
     description: 'Elegant residential design with modern amenities while respecting the local architectural context of Daronda. This spacious bungalow combines practical living spaces with aesthetic design elements.',
-    challenge: 'Balancing the client's desire for a modern home with the need to respect the local architectural vernacular and climate conditions.',
+    challenge: "Balancing the client's desire for a modern home with the need to respect the local architectural vernacular and climate conditions.",
     solution: 'The design incorporates traditional elements such as courtyards and deep verandahs while using contemporary materials and construction techniques for durability and maintenance.',
     mainImage: 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&w=2000&q=80',
     images: [
