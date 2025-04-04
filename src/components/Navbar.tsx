@@ -2,96 +2,110 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface NavbarProps {
+  isTransparent?: boolean;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      const offset = window.scrollY;
+      setScrolled(offset > 50);
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
-  const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Services', href: '#services' },
-    { name: 'Team', href: '#team' },
-    { name: 'Contact', href: '#contact' },
-  ];
-
   return (
-    <nav 
+    <header 
       className={cn(
-        "fixed w-full z-50 transition-all duration-300 py-4",
-        scrolled 
-          ? "bg-white shadow-md py-3" 
-          : "bg-transparent"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        isTransparent && !isMenuOpen && !scrolled ? 
+          "bg-transparent" : 
+          "bg-white shadow-sm"
       )}
     >
-      <div className="container-custom flex justify-between items-center">
-        <a href="#home" className={cn(
-          "font-serif text-2xl font-light tracking-wider",
-          scrolled ? "text-mono-dark" : "text-white"
+      <div className="container-custom flex justify-between items-center h-20">
+        <Link to="/" className={cn(
+          "font-serif font-light text-xl transition-colors duration-300",
+          isTransparent && !isMenuOpen && !scrolled ? "text-white" : "text-mono-dark"
         )}>
           DESIGN CANVAS
-        </a>
+        </Link>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center space-x-10">
+          {[
+            { name: "Home", href: "/" },
+            { name: "About", href: "/#about" },
+            { name: "Projects", href: "/projects" },
+            { name: "Services", href: "/#services" },
+            { name: "Team", href: "/#team" },
+            { name: "Contact", href: "/contact" },
+          ].map((item, index) => (
+            <Link 
+              key={index} 
+              to={item.href}
               className={cn(
-                "font-serif text-sm font-light tracking-wider transition-colors",
-                scrolled ? "text-mono-text hover:text-mono-accent" : "text-white hover:text-white/70"
+                "font-serif font-light hover:opacity-80 transition-opacity animate-border-bottom",
+                isTransparent && !isMenuOpen && !scrolled ? "text-white" : "text-mono-dark"
               )}
             >
-              {link.name}
-            </a>
+              {item.name}
+            </Link>
           ))}
-        </div>
+        </nav>
 
-        {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden"
-          onClick={() => setIsOpen(!isOpen)}
+        {/* Mobile Navigation Toggle */}
+        <button
+          className={cn(
+            "md:hidden p-2 focus:outline-none",
+            isTransparent && !isMenuOpen && !scrolled ? "text-white" : "text-mono-dark"
+          )}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
         >
-          {isOpen ? 
-            <X size={24} className={scrolled ? "text-mono-dark" : "text-white"} /> : 
-            <Menu size={24} className={scrolled ? "text-mono-dark" : "text-white"} />
-          }
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Menu Panel */}
-      {isOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-md animate-fade-in">
-          <div className="container-custom py-4 flex flex-col space-y-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-mono-text hover:text-mono-accent font-serif font-light tracking-wider py-2"
-                onClick={() => setIsOpen(false)}
+      {/* Mobile Menu */}
+      <div className={cn(
+        "fixed inset-0 bg-mono-dark z-40 transform transition-transform duration-300 pt-24",
+        isMenuOpen ? "translate-x-0" : "translate-x-full"
+      )}>
+        <div className="container-custom">
+          <nav className="flex flex-col space-y-6 py-10">
+            {[
+              { name: "Home", href: "/" },
+              { name: "About", href: "/#about" },
+              { name: "Projects", href: "/projects" },
+              { name: "Services", href: "/#services" },
+              { name: "Team", href: "/#team" },
+              { name: "Contact", href: "/contact" },
+            ].map((item, index) => (
+              <Link
+                key={index}
+                to={item.href}
+                className="text-white text-2xl font-serif font-light hover:text-gray-300 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                {link.name}
-              </a>
+                {item.name}
+              </Link>
             ))}
-          </div>
+          </nav>
         </div>
-      )}
-    </nav>
+      </div>
+    </header>
   );
 };
 

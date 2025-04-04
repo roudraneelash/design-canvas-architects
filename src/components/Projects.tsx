@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowRight, Eye, ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 type ProjectCategory = 'all' | 'residential' | 'interior' | 'religious' | 'commercial' | 'healthcare';
 
@@ -21,17 +22,62 @@ const Projects = () => {
 
   const projects = {
     residential: [
-      { name: 'G+1 Bungalow at Shantiniketan', location: 'West Bengal', image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=800&q=80' },
-      { name: 'G+1 Bungalow at Daronda', location: 'West Bengal', image: 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&w=800&q=80' },
-      { name: 'G+3 Bungalow at Kolkata', location: 'West Bengal', image: 'https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=800&q=80' },
-      { name: 'G+4 Apartment Building at Kolkata', location: 'West Bengal', image: 'https://images.unsplash.com/photo-1481026469463-66327c86e544?auto=format&fit=crop&w=800&q=80' },
-      { name: 'G+3 Residential Building', location: 'Chandigarh', image: 'https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?auto=format&fit=crop&w=800&q=80' },
+      { 
+        id: 'bungalow-shantiniketan', 
+        name: 'G+1 Bungalow at Shantiniketan', 
+        location: 'West Bengal', 
+        image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=800&q=80'
+      },
+      { 
+        id: 'bungalow-daronda', 
+        name: 'G+1 Bungalow at Daronda', 
+        location: 'West Bengal', 
+        image: 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&w=800&q=80' 
+      },
+      { 
+        id: 'bungalow-kolkata', 
+        name: 'G+3 Bungalow at Kolkata', 
+        location: 'West Bengal', 
+        image: 'https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=800&q=80' 
+      },
+      { 
+        id: 'apartment-kolkata', 
+        name: 'G+4 Apartment Building at Kolkata', 
+        location: 'West Bengal', 
+        image: 'https://images.unsplash.com/photo-1481026469463-66327c86e544?auto=format&fit=crop&w=800&q=80' 
+      },
+      { 
+        id: 'residential-chandigarh', 
+        name: 'G+3 Residential Building', 
+        location: 'Chandigarh', 
+        image: 'https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?auto=format&fit=crop&w=800&q=80' 
+      },
     ],
     interior: [
-      { name: 'Apartment Interior at South City', location: 'Kolkata', image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80' },
-      { name: 'Apartment Interior, Betor Heights', location: 'Howrah, W.B.', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80' },
-      { name: 'Apartment Interiors Mayfair Housing', location: 'Kolkata', image: 'https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=800&q=80' },
-      { name: 'G+1 Residential Interiors, Mehrauli', location: 'New Delhi', image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80' },
+      { 
+        id: 'interior-southcity', 
+        name: 'Apartment Interior at South City', 
+        location: 'Kolkata', 
+        image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80' 
+      },
+      { 
+        id: 'interior-betor', 
+        name: 'Apartment Interior, Betor Heights', 
+        location: 'Howrah, W.B.', 
+        image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80' 
+      },
+      { 
+        id: 'interior-mayfair', 
+        name: 'Apartment Interiors Mayfair Housing', 
+        location: 'Kolkata', 
+        image: 'https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=800&q=80' 
+      },
+      { 
+        id: 'interior-mehrauli', 
+        name: 'G+1 Residential Interiors, Mehrauli', 
+        location: 'New Delhi', 
+        image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80' 
+      },
     ],
     religious: [
       { name: 'Basona Kali Temple', location: 'Garia, Kolkata', image: 'https://images.unsplash.com/photo-1518542448-471888cc959d?auto=format&fit=crop&w=800&q=80' },
@@ -119,12 +165,9 @@ const Projects = () => {
                 <p className="text-white/80 font-light font-serif mb-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">{project.location}</p>
                 
                 <div className="flex space-x-4 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-150">
-                  <a href="#" className="flex items-center text-white hover:text-gray-300 transition-colors font-serif text-sm font-light">
+                  <Link to={`/projects/${project.id}`} className="flex items-center text-white hover:text-gray-300 transition-colors font-serif text-sm font-light">
                     <Eye size={16} className="mr-1" /> View Project
-                  </a>
-                  <a href="#" className="flex items-center text-white hover:text-gray-300 transition-colors font-serif text-sm font-light">
-                    <ExternalLink size={16} className="mr-1" /> Details
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -133,17 +176,17 @@ const Projects = () => {
         
         {/* View All Projects Button */}
         <div className="flex justify-center mt-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-          <a 
-            href="#" 
+          <Link 
+            to="/projects" 
             className="group inline-flex items-center px-8 py-3 bg-mono-dark text-white font-light font-serif hover:bg-mono-medium transition-colors duration-300"
           >
             View All Projects
             <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-          </a>
+          </Link>
         </div>
         
         {/* Achievements/Stats Section */}
-        <div className="mt-24 mb-8 p-12 bg-mono-dark text-white">
+        <div className="mt-24 mb-8 p-12 bg-gradient-to-r from-[#222222] to-[#333333] text-white">
           <h2 className="text-3xl font-light text-white text-center mb-12 font-serif animate-fade-in">Our Achievements</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat, index) => (

@@ -11,9 +11,9 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-mono-dark text-white pt-16 pb-8">
+    <footer className="bg-gradient-to-b from-[#222222] to-[#1a1a1a] text-white pt-16 pb-8">
       <div className="container-custom">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
           <div>
             <h3 className="text-xl font-serif font-light mb-5">DESIGN CANVAS</h3>
             <p className="text-white/70 mb-6 font-light font-serif">
@@ -35,7 +35,8 @@ const Footer = () => {
               <li><a href="#projects" className="text-white/70 hover:text-white transition-colors font-serif font-light">Our Projects</a></li>
               <li><a href="#services" className="text-white/70 hover:text-white transition-colors font-serif font-light">Services</a></li>
               <li><a href="#team" className="text-white/70 hover:text-white transition-colors font-serif font-light">Our Team</a></li>
-              <li><a href="#contact" className="text-white/70 hover:text-white transition-colors font-serif font-light">Contact</a></li>
+              <li><a href="/contact" className="text-white/70 hover:text-white transition-colors font-serif font-light">Contact</a></li>
+              <li><a href="/projects" className="text-white/70 hover:text-white transition-colors font-serif font-light">View All Projects</a></li>
             </ul>
           </div>
           
@@ -48,23 +49,6 @@ const Footer = () => {
               <li className="pt-2">info@designcanvas.com</li>
               <li>+1 (415) 555-0123</li>
             </ul>
-          </div>
-          
-          <div>
-            <h4 className="text-lg font-light mb-5 font-serif">Newsletter</h4>
-            <p className="text-white/70 mb-4 font-serif font-light">
-              Subscribe to our newsletter for the latest updates on projects and architectural insights.
-            </p>
-            <form className="flex">
-              <input 
-                type="email" 
-                placeholder="Your email address" 
-                className="flex-grow px-4 py-2 bg-white/10 focus:bg-white/20 border border-white/20 rounded-none text-white placeholder:text-white/50 focus:outline-none font-serif font-light"
-              />
-              <button className="px-4 py-2 bg-white text-mono-dark font-light rounded-none hover:bg-white/90 transition-colors font-serif">
-                Subscribe
-              </button>
-            </form>
           </div>
         </div>
         

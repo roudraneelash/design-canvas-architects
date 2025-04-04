@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
@@ -10,6 +10,8 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
 const Index = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
   useEffect(() => {
     // Enhanced animation on scroll functionality
     const animateElements = () => {
@@ -25,12 +27,12 @@ const Index = () => {
       });
     };
     
-    // Initialize animations
-    animateElements();
-    
-    // Add scroll event listener with throttling
-    let scrollTimeout: number;
+    // Track scroll position for navbar transparency
     const handleScroll = () => {
+      const position = window.scrollY;
+      setScrollPosition(position);
+      
+      // Animate elements on scroll with throttling
       if (!scrollTimeout) {
         scrollTimeout = window.setTimeout(() => {
           scrollTimeout = 0;
@@ -39,6 +41,11 @@ const Index = () => {
       }
     };
     
+    // Initialize animations
+    animateElements();
+    
+    // Add scroll event listener with throttling
+    let scrollTimeout: number;
     window.addEventListener('scroll', handleScroll);
     
     // Clean up
@@ -50,7 +57,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar />
+      <Navbar isTransparent={scrollPosition < 100} />
       <Hero />
       <About />
       <Projects />

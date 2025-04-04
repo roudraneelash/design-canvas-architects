@@ -59,7 +59,7 @@ const About = () => {
           ))}
         </div>
 
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-mono-dark p-10 rounded-lg">
           <div className="animate-on-scroll md:order-2">
             <div className="relative overflow-hidden">
               <img 
@@ -72,17 +72,17 @@ const About = () => {
           </div>
           
           <div className="animate-on-scroll md:order-1" style={{ animationDelay: "0.15s" }}>
-            <h2 className="text-3xl md:text-4xl font-light mb-6 text-mono-dark font-serif">Our Story</h2>
-            <div className="w-20 h-[1px] bg-mono-accent mb-6"></div>
-            <p className="text-mono-text mb-4 font-serif font-light">
+            <h2 className="text-3xl md:text-4xl font-light mb-6 text-white font-serif">Our Story</h2>
+            <div className="w-20 h-[1px] bg-white/40 mb-6"></div>
+            <p className="text-white/90 mb-4 font-serif font-light">
               Founded in 2005 by a collective of forward-thinking architects, Design Canvas emerged from a shared vision to challenge conventional approaches to the built environment. 
               We've since grown into a dynamic studio of architects, designers, and planners united by a passion for creating meaningful spaces.
             </p>
-            <p className="text-mono-text mb-6 font-serif font-light">
+            <p className="text-white/90 mb-6 font-serif font-light">
               Over the years, we've cultivated a diverse portfolio spanning residential, commercial, cultural, and public projects. 
               Each design reflects our commitment to innovation, sustainability, and the unique contexts in which our buildings exist.
             </p>
-            <a href="#projects" className="inline-flex items-center font-serif font-light text-mono-dark hover:text-[#9b87f5] transition-colors group">
+            <a href="#projects" className="inline-flex items-center font-serif font-light text-white hover:text-[#9b87f5] transition-colors group">
               Explore our work
               <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
             </a>

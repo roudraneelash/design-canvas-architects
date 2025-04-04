@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { ArrowRight, Mail, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Linkedin, Twitter } from 'lucide-react';
 
 const Team = () => {
   const team = [
@@ -48,7 +48,7 @@ const Team = () => {
   ];
 
   return (
-    <section id="team" className="section-padding bg-mono-dark text-white">
+    <section id="team" className="section-padding bg-gradient-to-b from-[#222222] to-[#333333] text-white">
       <div className="container-custom">
         <div className="max-w-3xl mx-auto text-center mb-16 animate-on-scroll">
           <h2 className="text-3xl md:text-4xl font-light mb-4 font-serif text-white">Our Team</h2>
