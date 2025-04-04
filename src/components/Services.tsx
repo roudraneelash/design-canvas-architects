@@ -121,7 +121,7 @@ const Services = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
-          filter: "brightness(0.15)"
+          filter: "brightness(0.25)" // Reduced darkness to make it more opaque
         }}
       />
       
@@ -138,13 +138,13 @@ const Services = () => {
           {services.map((service, index) => (
             <div 
               key={index} 
-              className="p-8 bg-black/40 border border-white/10 rounded-none text-center hover:bg-black/60 transition-all duration-300 transform hover:-translate-y-1 animate-on-scroll"
+              className="p-8 bg-black/30 border border-white/10 rounded-none text-center hover:bg-black/50 transition-all duration-300 transform hover:-translate-y-1 animate-on-scroll"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="text-white/90">
                 {service.icon}
               </div>
-              <h3 className="text-xl font-light mb-3 text-white font-serif">{service.title}</h3>
+              <h3 className="text-xl font-light mb-3 text-white hover:text-[#FFA726] font-serif">{service.title}</h3>
               <p className="text-white/70 font-light">{service.description}</p>
             </div>
           ))}
@@ -154,7 +154,7 @@ const Services = () => {
           <h3 className="text-2xl font-light mb-6 text-white font-serif">Ready to Start Your Project?</h3>
           <a 
             href="#contact" 
-            className="inline-block px-8 py-3 bg-white text-black font-light rounded-none hover:bg-gray-300 transition-all duration-300 font-serif"
+            className="inline-block px-8 py-3 bg-white text-black font-light rounded-none hover:bg-[#FFA726] hover:text-black transition-all duration-300 font-serif"
           >
             Get in Touch
           </a>

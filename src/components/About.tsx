@@ -53,13 +53,13 @@ const About = () => {
                 />
                 <div className="absolute inset-0 bg-mono-dark/30 group-hover:bg-mono-dark/20 transition-all duration-300"></div>
               </div>
-              <h3 className={cn("text-xl font-light mb-3 font-serif", item.color)}>{item.title}</h3>
+              <h3 className={cn("text-xl font-light mb-3 font-serif group-hover:text-[#FFA726] transition-colors", item.color)}>{item.title}</h3>
               <p className="text-mono-text font-serif font-light">{item.text}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-mono-dark p-10 rounded-lg">
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-[#222] p-10 rounded-lg">
           <div className="animate-on-scroll md:order-2">
             <div className="relative overflow-hidden">
               <img 
@@ -67,7 +67,7 @@ const About = () => {
                 alt="Architecture studio" 
                 className="w-full h-auto object-cover"
               />
-              <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-mono-dark/80 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-[#222]/80 to-transparent"></div>
             </div>
           </div>
           
@@ -82,7 +82,8 @@ const About = () => {
               Over the years, we've cultivated a diverse portfolio spanning residential, commercial, cultural, and public projects. 
               Each design reflects our commitment to innovation, sustainability, and the unique contexts in which our buildings exist.
             </p>
-            <a href="#projects" className="inline-flex items-center font-serif font-light text-white hover:text-[#9b87f5] transition-colors group">
+            <a href="#projects" className="inline-flex items-center font-serif font-light bg-[#333] hover:bg-[#444] text-white hover:text-[#FFA726] transition-all px-6 py-2 pl-8 ml-4 relative group">
+              <span className="absolute left-0 top-0 h-full w-1 bg-[#FFA726]"></span>
               Explore our work
               <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
             </a>

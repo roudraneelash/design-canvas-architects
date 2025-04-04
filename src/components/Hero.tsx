@@ -10,8 +10,8 @@ const Hero = () => {
       <div 
         className="absolute inset-0 w-full h-full bg-cover bg-center"
         style={{ 
-          backgroundImage: `url("https://images.unsplash.com/photo-1527576539890-dfa815648363?auto=format&fit=crop&w=2000&q=80")`,
-          filter: 'brightness(0.7)'
+          backgroundImage: `url("https://images.unsplash.com/photo-1536412597336-ade7b523ecfc?auto=format&fit=crop&w=2000&q=80")`,
+          filter: 'brightness(0.5) grayscale(0.8)'
         }}
       />
 
@@ -19,17 +19,17 @@ const Hero = () => {
       <div className="absolute inset-0 bg-black/50" />
       
       {/* Content */}
-      <div className="absolute inset-0 flex flex-col justify-center items-start px-6 md:px-24 z-10">
+      <div className="absolute inset-0 flex flex-col justify-center items-center px-6 md:px-24 z-10 text-center">
         <div className="max-w-3xl animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-light text-white tracking-tight font-serif mb-8">
             DESIGN CANVAS ARCHITECTS
           </h1>
           
-          <p className="text-xl md:text-2xl text-white/90 font-extralight font-serif mb-12">
+          <p className="text-xl md:text-2xl text-white/90 font-extralight font-serif mb-12 animate-scale-in" style={{ animationDelay: '0.4s' }}>
             Creating exceptional spaces that inspire, endure, and transform.
           </p>
           
-          <div className="space-x-4 flex items-center mt-4">
+          <div className="space-x-4 flex items-center justify-center mt-4">
             <a 
               href="#projects" 
               className={cn(
@@ -43,7 +43,7 @@ const Hero = () => {
             
             <div className="hidden md:flex items-center">
               <div className="w-12 h-[1px] bg-white/50 mr-3"></div>
-              <a href="#contact" className="text-white hover:text-gray-300 transition-colors font-serif">
+              <a href="#contact" className="text-white hover:text-[#FFA726] transition-colors font-serif">
                 Get in Touch
               </a>
             </div>
@@ -51,9 +51,9 @@ const Hero = () => {
         </div>
         
         {/* Scroll Down */}
-        <div className="absolute bottom-10 right-6 md:right-24 flex flex-col items-center animate-fade-in" style={{ animationDelay: '0.5s' }}>
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center animate-fade-in" style={{ animationDelay: '0.5s' }}>
           <a href="#about" className="text-white/80 group flex flex-col items-center">
-            <span className="text-sm mb-2 group-hover:text-white transition-colors font-serif">Scroll</span>
+            <span className="text-sm mb-2 group-hover:text-[#FFA726] transition-colors font-serif">Scroll</span>
             <ArrowDown size={20} className="animate-bounce" />
           </a>
         </div>
