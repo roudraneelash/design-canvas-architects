@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
@@ -57,6 +56,19 @@ const About = () => {
               <p className="text-mono-text font-serif font-light">{item.text}</p>
             </div>
           ))}
+        </div>
+
+        <div className="relative w-full h-[250px] my-20 overflow-hidden">
+          <div 
+            className="absolute inset-0 w-full h-full bg-fixed bg-center bg-cover"
+            style={{ backgroundImage: "url(https://images.unsplash.com/photo-1532680678473-a16f2cda8e43?auto=format&fit=crop&w=1200&q=80)" }}
+          />
+          <div className="absolute inset-0 bg-mono-dark/50" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <h2 className="text-4xl md:text-5xl text-white font-serif font-light tracking-wide animate-on-scroll px-4 text-center">
+              Where Vision Meets Craft
+            </h2>
+          </div>
         </div>
 
         <div className="mt-20 relative overflow-hidden">
