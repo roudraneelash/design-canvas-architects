@@ -6,9 +6,9 @@ import { ArrowDown, ArrowRight } from 'lucide-react';
 const Hero = () => {
   return (
     <section id="home" className="relative h-screen w-full overflow-hidden">
-      {/* Hero Background - Updated image and overlay effect */}
+      {/* Hero Background - Fixed background with z-index -1 */}
       <div 
-        className="absolute inset-0 w-full h-full bg-cover bg-center"
+        className="fixed inset-0 w-full h-full bg-cover bg-center z-[-1]"
         style={{ 
           backgroundImage: `url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2000&q=80")`,
           filter: 'brightness(0.6) contrast(1.1)'

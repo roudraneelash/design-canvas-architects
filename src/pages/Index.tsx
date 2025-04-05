@@ -5,9 +5,9 @@ import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Projects from '@/components/Projects';
 import Services from '@/components/Services';
-import Team from '@/components/Team';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import ParallaxDivider from '@/components/ParallaxDivider';
 
 const Index = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -59,10 +59,28 @@ const Index = () => {
     <div className="min-h-screen">
       <Navbar isTransparent={scrollPosition < 100} />
       <Hero />
+      
       <About />
+      
+      <ParallaxDivider 
+        imageUrl="https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?auto=format&fit=crop&w=1200&q=80"
+        text="Our Vision" 
+      />
+      
       <Projects />
+      
+      <ParallaxDivider 
+        imageUrl="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80"
+        text="Excellence in Architecture" 
+      />
+      
       <Services />
-      <Team />
+      
+      <ParallaxDivider 
+        imageUrl="https://images.unsplash.com/photo-1481026469463-66327c86e544?auto=format&fit=crop&w=1200&q=80"
+        height="h-[250px]"
+      />
+      
       <Contact />
       <Footer />
     </div>
