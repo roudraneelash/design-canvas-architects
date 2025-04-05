@@ -22,21 +22,21 @@ const About = () => {
               title: "Design Philosophy",
               text: "We believe in the power of thoughtful design to transform everyday experiences. Our approach balances aesthetics, functionality, and sustainability.",
               image: "https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&w=800&q=80",
-              color: "text-[#9b87f5]",
+              color: "text-[#D18700]",
               delay: 0
             },
             {
               title: "Sustainability",
               text: "Environmental responsibility is at the core of every project. We integrate sustainable practices and materials to minimize ecological impact.",
               image: "https://images.unsplash.com/photo-1481026469463-66327c86e544?auto=format&fit=crop&w=800&q=80",
-              color: "text-[#6E59A5]",
+              color: "text-[#B67B14]",
               delay: 0.1
             },
             {
               title: "Collaboration",
               text: "We view architecture as a collaborative art. By working closely with clients, engineers, and communities, we ensure projects meet all stakeholders' needs.",
               image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80",
-              color: "text-[#7E69AB]",
+              color: "text-[#E29728]",
               delay: 0.2
             }
           ].map((item, index) => (
@@ -82,8 +82,8 @@ const About = () => {
               Over the years, we've cultivated a diverse portfolio spanning residential, commercial, cultural, and public projects. 
               Each design reflects our commitment to innovation, sustainability, and the unique contexts in which our buildings exist.
             </p>
-            <a href="#projects" className="inline-flex items-center font-serif font-light bg-[#333] hover:bg-[#444] text-white hover:text-[#FFA726] transition-all px-6 py-2 pl-8 ml-4 relative group">
-              <span className="absolute left-0 top-0 h-full w-1 bg-[#FFA726]"></span>
+            <a href="#projects" className="inline-flex items-center font-serif font-light bg-[#333] hover:bg-[#444] text-white hover:text-[#FFA726] transition-all px-8 py-3 pl-12 ml-4 relative group">
+              <span className="absolute left-0 top-0 h-full w-2 bg-[#FFA726]"></span>
               Explore our work
               <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
             </a>

@@ -80,21 +80,76 @@ const Projects = () => {
       },
     ],
     religious: [
-      { name: 'Basona Kali Temple', location: 'Garia, Kolkata', image: 'https://images.unsplash.com/photo-1518542448-471888cc959d?auto=format&fit=crop&w=800&q=80' },
-      { name: 'Temple Complex & Meditation Hall', location: 'West Bengal', image: 'https://images.unsplash.com/photo-1602301129763-de34c3165b7e?auto=format&fit=crop&w=800&q=80' },
-      { name: 'Ghat redevelopment', location: 'Maliandi, W.B.', image: 'https://images.unsplash.com/photo-1597910037310-375025f42cc2?auto=format&fit=crop&w=800&q=80' },
+      { 
+        id: 'basona-kali-temple', 
+        name: 'Basona Kali Temple', 
+        location: 'Garia, Kolkata', 
+        image: 'https://images.unsplash.com/photo-1518542448-471888cc959d?auto=format&fit=crop&w=800&q=80' 
+      },
+      { 
+        id: 'temple-complex', 
+        name: 'Temple Complex & Meditation Hall', 
+        location: 'West Bengal', 
+        image: 'https://images.unsplash.com/photo-1602301129763-de34c3165b7e?auto=format&fit=crop&w=800&q=80' 
+      },
+      { 
+        id: 'ghat-redevelopment', 
+        name: 'Ghat redevelopment', 
+        location: 'Maliandi, W.B.', 
+        image: 'https://images.unsplash.com/photo-1597910037310-375025f42cc2?auto=format&fit=crop&w=800&q=80' 
+      },
     ],
     commercial: [
-      { name: 'Admin Building, IOCL, Bottling Plant', location: 'Kalyani', image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80' },
-      { name: 'Cable Factory', location: 'Bashanti, South 24 Parganas, W.B.', image: 'https://images.unsplash.com/photo-1555652736-e92021d28a11?auto=format&fit=crop&w=800&q=80' },
-      { name: 'Electrical Sub Station for WBSEDCL', location: 'Mohishadal, W.B.', image: 'https://images.unsplash.com/photo-1626897855769-6e267bd43be4?auto=format&fit=crop&w=800&q=80' },
-      { name: 'Eco Resort at Taherpur', location: 'West Bengal', image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80' },
-      { name: 'Facelift of G+9, Housing', location: 'Newtown, West Bengal', image: 'https://images.unsplash.com/photo-1535399280929-c825303205d1?auto=format&fit=crop&w=800&q=80' },
-      { name: 'Facelift of G+11 Housing, Ranchi Smart City', location: 'Chattisgarh', image: 'https://images.unsplash.com/photo-1470723710355-95304d8aece4?auto=format&fit=crop&w=800&q=80' },
+      { 
+        id: 'admin-iocl', 
+        name: 'Admin Building, IOCL, Bottling Plant', 
+        location: 'Kalyani', 
+        image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80' 
+      },
+      { 
+        id: 'cable-factory', 
+        name: 'Cable Factory', 
+        location: 'Bashanti, South 24 Parganas, W.B.', 
+        image: 'https://images.unsplash.com/photo-1555652736-e92021d28a11?auto=format&fit=crop&w=800&q=80' 
+      },
+      { 
+        id: 'electrical-substation', 
+        name: 'Electrical Sub Station for WBSEDCL', 
+        location: 'Mohishadal, W.B.', 
+        image: 'https://images.unsplash.com/photo-1626897855769-6e267bd43be4?auto=format&fit=crop&w=800&q=80' 
+      },
+      { 
+        id: 'eco-resort', 
+        name: 'Eco Resort at Taherpur', 
+        location: 'West Bengal', 
+        image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80' 
+      },
+      { 
+        id: 'facelift-housing', 
+        name: 'Facelift of G+9, Housing', 
+        location: 'Newtown, West Bengal', 
+        image: 'https://images.unsplash.com/photo-1535399280929-c825303205d1?auto=format&fit=crop&w=800&q=80' 
+      },
+      { 
+        id: 'facelift-ranchi', 
+        name: 'Facelift of G+11 Housing, Ranchi Smart City', 
+        location: 'Chattisgarh', 
+        image: 'https://images.unsplash.com/photo-1470723710355-95304d8aece4?auto=format&fit=crop&w=800&q=80' 
+      },
     ],
     healthcare: [
-      { name: 'Hospital at Raigunj', location: 'West Bengal', image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80' },
-      { name: 'G+IV Storied Hospital at Chandrakona', location: 'Paschim Mednipur, W.B.', image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80' },
+      { 
+        id: 'hospital-raigunj', 
+        name: 'Hospital at Raigunj', 
+        location: 'West Bengal', 
+        image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80' 
+      },
+      { 
+        id: 'hospital-chandrakona', 
+        name: 'G+IV Storied Hospital at Chandrakona', 
+        location: 'Paschim Mednipur, W.B.', 
+        image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80' 
+      },
     ],
   };
 
@@ -165,7 +220,7 @@ const Projects = () => {
                 <p className="text-white/80 font-light font-serif mb-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">{project.location}</p>
                 
                 <div className="flex space-x-4 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-150">
-                  <Link to={`/projects/${project.id}`} className="flex items-center text-white hover:text-gray-300 transition-colors font-serif text-sm font-light">
+                  <Link to={`/projects/${project.id}`} className="flex items-center text-white hover:text-[#FFA726] transition-colors font-serif text-sm font-light">
                     <Eye size={16} className="mr-1" /> View Project
                   </Link>
                 </div>
@@ -178,7 +233,7 @@ const Projects = () => {
         <div className="flex justify-center mt-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
           <Link 
             to="/projects" 
-            className="group inline-flex items-center px-8 py-3 bg-mono-dark text-white font-light font-serif hover:bg-mono-medium transition-colors duration-300"
+            className="group inline-flex items-center px-8 py-3 bg-mono-dark text-white font-light font-serif hover:bg-mono-medium transition-colors duration-300 hover:text-[#FFA726]"
           >
             View All Projects
             <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
@@ -191,7 +246,7 @@ const Projects = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
               <div key={index} className="animate-on-scroll text-center" style={{ animationDelay: `${index * 0.1}s` }}>
-                <p className="text-4xl font-light text-white mb-2 font-serif">{stat.value}</p>
+                <p className="text-4xl font-light text-[#FFA726] mb-2 font-serif">{stat.value}</p>
                 <p className="text-white/80 uppercase tracking-wider text-sm font-light font-serif">{stat.label}</p>
               </div>
             ))}

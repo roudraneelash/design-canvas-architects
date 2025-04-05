@@ -113,7 +113,7 @@ const Services = () => {
 
   return (
     <section id="services" className="section-padding relative">
-      {/* Background Image with Overlay */}
+      {/* Background Image with Overlay - More opaque */}
       <div 
         className="absolute inset-0 w-full h-full" 
         style={{
@@ -121,7 +121,7 @@ const Services = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
-          filter: "brightness(0.25)" // Reduced darkness to make it more opaque
+          filter: "brightness(0.35)" // Increased opacity/brightness
         }}
       />
       
@@ -138,7 +138,7 @@ const Services = () => {
           {services.map((service, index) => (
             <div 
               key={index} 
-              className="p-8 bg-black/30 border border-white/10 rounded-none text-center hover:bg-black/50 transition-all duration-300 transform hover:-translate-y-1 animate-on-scroll"
+              className="p-8 bg-black/40 border border-white/10 rounded-none text-center hover:bg-black/60 transition-all duration-300 transform hover:-translate-y-1 animate-on-scroll"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="text-white/90">
