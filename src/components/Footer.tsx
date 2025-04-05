@@ -11,55 +11,42 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-b from-[#222222] to-[#1a1a1a] text-white pt-16 pb-8">
+    <footer className="bg-mono-dark text-white py-10">
       <div className="container-custom">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <div>
-            <h3 className="text-xl font-serif font-light mb-5">DESIGN CANVAS</h3>
-            <p className="text-white/70 mb-6 font-light font-serif">
-              Creating exceptional spaces that inspire, endure, and transform the way people live.
+            <h3 className="text-xl font-serif font-light mb-4">DESIGN CANVAS</h3>
+            <p className="text-white/70 mb-4 font-light font-serif">
+              Creating exceptional spaces that inspire, endure, and transform.
             </p>
             <button 
               onClick={scrollToTop}
-              className="flex items-center text-white/70 hover:text-white transition-colors font-serif font-light"
+              className="flex items-center text-white/70 hover:text-[#FFA726] transition-colors font-serif font-light"
             >
               Back to top <ArrowUp size={16} className="ml-2" />
             </button>
           </div>
           
-          <div>
-            <h4 className="text-lg font-light mb-5 font-serif">Explore</h4>
-            <ul className="space-y-3">
-              <li><a href="#home" className="text-white/70 hover:text-white transition-colors font-serif font-light">Home</a></li>
-              <li><a href="#about" className="text-white/70 hover:text-white transition-colors font-serif font-light">About Us</a></li>
-              <li><a href="#projects" className="text-white/70 hover:text-white transition-colors font-serif font-light">Our Projects</a></li>
-              <li><a href="#services" className="text-white/70 hover:text-white transition-colors font-serif font-light">Services</a></li>
-              <li><a href="#team" className="text-white/70 hover:text-white transition-colors font-serif font-light">Our Team</a></li>
-              <li><a href="/contact" className="text-white/70 hover:text-white transition-colors font-serif font-light">Contact</a></li>
-              <li><a href="/projects" className="text-white/70 hover:text-white transition-colors font-serif font-light">View All Projects</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="text-lg font-light mb-5 font-serif">Contact</h4>
-            <ul className="space-y-3 text-white/70 font-serif font-light">
-              <li>123 Architecture Avenue</li>
-              <li>San Francisco, CA 94103</li>
-              <li>United States</li>
-              <li className="pt-2">info@designcanvas.com</li>
-              <li>+1 (415) 555-0123</li>
-            </ul>
+          <div className="flex flex-col md:flex-row md:justify-end">
+            <div className="space-y-4">
+              <h4 className="text-lg font-light mb-2 font-serif">Contact</h4>
+              <div className="text-white/70 font-serif font-light">
+                <p>info@designcanvas.com</p>
+                <p>+1 (415) 555-0123</p>
+                <p>San Francisco, CA</p>
+              </div>
+            </div>
           </div>
         </div>
         
-        <div className="pt-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-center">
+        <div className="pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/70 text-sm mb-4 md:mb-0 font-serif font-light">
             © {new Date().getFullYear()} Design Canvas Architects. All rights reserved.
           </p>
           <div className="flex space-x-6">
-            <a href="#" className="text-white/70 hover:text-white transition-colors text-sm font-serif font-light">Privacy Policy</a>
-            <a href="#" className="text-white/70 hover:text-white transition-colors text-sm font-serif font-light">Terms of Service</a>
-            <a href="#" className="text-white/70 hover:text-white transition-colors text-sm font-serif font-light">Careers</a>
+            <a href="/contact" className="text-white/70 hover:text-[#FFA726] transition-colors text-sm font-serif font-light">Contact</a>
+            <a href="#" className="text-white/70 hover:text-[#FFA726] transition-colors text-sm font-serif font-light">Privacy</a>
+            <a href="#" className="text-white/70 hover:text-[#FFA726] transition-colors text-sm font-serif font-light">Terms</a>
           </div>
         </div>
       </div>

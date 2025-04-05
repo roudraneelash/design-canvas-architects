@@ -60,28 +60,31 @@ const Index = () => {
       <Navbar isTransparent={scrollPosition < 100} />
       <Hero />
       
+      <ParallaxDivider 
+        imageUrl="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80"
+        height="h-[250px]"
+      />
+      
       <About />
       
       <ParallaxDivider 
-        imageUrl="https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?auto=format&fit=crop&w=1200&q=80"
-        text="Our Vision" 
+        imageUrl="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=1200&q=80"
+        height="h-[250px]"
       />
       
       <Projects />
       
-      <ParallaxDivider 
-        imageUrl="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80"
-        text="Excellence in Architecture" 
-      />
-      
       <Services />
       
-      <ParallaxDivider 
-        imageUrl="https://images.unsplash.com/photo-1481026469463-66327c86e544?auto=format&fit=crop&w=1200&q=80"
-        height="h-[250px]"
-      />
+      <div className="bg-mono-light py-10 text-center">
+        <a 
+          href="/contact" 
+          className="inline-flex items-center justify-center px-8 py-3 bg-mono-dark text-white font-light rounded-none font-serif hover:bg-mono-medium transition-colors"
+        >
+          Contact Us
+        </a>
+      </div>
       
-      <Contact />
       <Footer />
     </div>
   );
