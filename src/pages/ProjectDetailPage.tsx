@@ -3,9 +3,17 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { ArrowLeft, Calendar, MapPin, SquarePen, Building, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Calendar, MapPin, SquarePen, Building, ArrowRight, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 // Project data - would normally come from an API or database
 const projectsData = [
@@ -57,6 +65,8 @@ const ProjectDetailPage = () => {
   const [project, setProject] = useState<any>(null);
   const [relatedProjects, setRelatedProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   
   useEffect(() => {
     // Simulating an API call to get project data
@@ -81,7 +91,15 @@ const ProjectDetailPage = () => {
     };
     
     fetchProject();
+    // Reset the selected image when changing projects
+    setSelectedImageIndex(null);
+    setIsDialogOpen(false);
   }, [projectId]);
+  
+  const openImageDialog = (index: number) => {
+    setSelectedImageIndex(index);
+    setIsDialogOpen(true);
+  };
   
   if (loading) {
     return (
@@ -110,6 +128,9 @@ const ProjectDetailPage = () => {
       </div>
     );
   }
+  
+  // Combine main image with other images for the gallery
+  const allImages = [project.mainImage, ...project.images];
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -207,28 +228,70 @@ const ProjectDetailPage = () => {
         </div>
       </section>
       
-      {/* Project Gallery */}
-      <section className="py-16">
+      {/* Project Gallery - Grid Layout */}
+      <section className="py-16 bg-white">
         <div className="container-custom">
           <h2 className="text-3xl font-light font-serif mb-8 text-mono-dark">Project Gallery</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {project.images.map((image: string, index: number) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {allImages.map((image: string, index: number) => (
               <div 
                 key={index} 
-                className="aspect-[4/3] overflow-hidden group animate-on-scroll"
+                className="aspect-square overflow-hidden cursor-pointer group animate-on-scroll"
                 style={{ animationDelay: `${index * 0.1}s` }}
+                onClick={() => openImageDialog(index)}
               >
-                <img 
-                  src={image} 
-                  alt={`${project.name} - Image ${index + 1}`} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
+                <div className="relative h-full w-full">
+                  <img 
+                    src={image} 
+                    alt={`${project.name} - Image ${index + 1}`} 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
+                    <span className="text-white font-serif">View Image</span>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
+      
+      {/* Dialog for Image Slideshow */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="max-w-5xl bg-black/90 border-none p-0">
+          <Button 
+            variant="outline" 
+            size="icon" 
+            className="absolute right-4 top-4 z-50 rounded-full bg-white/10 hover:bg-white/20 border-none text-white" 
+            onClick={() => setIsDialogOpen(false)}
+          >
+            <X className="h-4 w-4" />
+          </Button>
+          
+          <Carousel className="w-full max-h-[80vh]">
+            <CarouselContent>
+              {allImages.map((image: string, index: number) => (
+                <CarouselItem key={index} className="flex items-center justify-center">
+                  <div className="flex items-center justify-center h-full w-full p-4">
+                    <img 
+                      src={image} 
+                      alt={`${project.name} - Image ${index + 1}`} 
+                      className="max-h-[75vh] object-contain"
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-4 bg-white/10 hover:bg-white/20 border-none text-white" />
+            <CarouselNext className="right-4 bg-white/10 hover:bg-white/20 border-none text-white" />
+          </Carousel>
+          
+          <div className="p-4 text-center text-white">
+            <p className="font-serif text-lg">{project.name} - Image {selectedImageIndex !== null ? selectedImageIndex + 1 : 1} of {allImages.length}</p>
+          </div>
+        </DialogContent>
+      </Dialog>
       
       {/* Related Projects */}
       {relatedProjects.length > 0 && (
