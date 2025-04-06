@@ -6,160 +6,175 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Send, MapPin, Phone, Mail } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const ContactPage = () => {
+  const { toast } = useToast();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    toast({
+      title: "Message sent",
+      description: "We'll get back to you soon!",
+    });
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      {/* Page Header */}
-      <div className="relative h-[40vh] w-full">
-        {/* Header Background */}
-        <div 
-          className="absolute inset-0 w-full h-full bg-cover bg-center"
-          style={{ 
-            backgroundImage: `url("https://images.unsplash.com/photo-1527576539890-dfa815648363?auto=format&fit=crop&w=2000&q=80")`,
-            filter: 'brightness(0.7)'
-          }}
-        />
-        <div className="absolute inset-0 bg-black/60" />
+      {/* Main Contact Section with Background */}
+      <main 
+        className="flex-grow relative bg-cover bg-center"
+        style={{
+          backgroundImage: `url("https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=2000&q=80")`,
+        }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/70"></div>
         
-        <div className="container-custom relative z-10 flex flex-col justify-center h-full">
-          <h1 className="text-4xl md:text-5xl text-white font-light font-serif">Contact Us</h1>
-          <div className="w-20 h-[1px] bg-white/50 my-4"></div>
-          <p className="text-white/80 max-w-xl font-serif font-light">
-            We're here to answer any questions you may have about our architectural services.
-          </p>
-        </div>
-      </div>
-      
-      {/* Contact Content */}
-      <main className="flex-grow bg-mono-light">
-        <div className="container-custom py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div className="bg-white p-8 shadow-sm animate-fade-in">
-              <h2 className="text-2xl font-serif font-light mb-6 text-mono-dark">Send Us a Message</h2>
-              
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm mb-2 font-serif text-mono-medium">Full Name</label>
-                    <Input 
-                      id="name" 
-                      type="text" 
-                      placeholder="Your name" 
-                      className="w-full font-serif font-light"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm mb-2 font-serif text-mono-medium">Email Address</label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      placeholder="Your email" 
-                      className="w-full font-serif font-light" 
-                    />
-                  </div>
-                </div>
-                
+        {/* Content Container */}
+        <div className="container-custom relative z-10 py-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center h-full">
+          
+          {/* Left Side - Contact Form */}
+          <div className="lg:col-span-6 bg-white/95 p-8 rounded-sm shadow-lg animate-fade-in">
+            <h2 className="text-2xl font-serif font-light mb-6 text-mono-dark border-b pb-2 border-mono-accent/30">
+              Get in Touch
+            </h2>
+            
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid grid-cols-2 gap-5">
                 <div>
-                  <label htmlFor="subject" className="block text-sm mb-2 font-serif text-mono-medium">Subject</label>
+                  <label htmlFor="firstName" className="block text-sm font-medium mb-1 text-mono-medium font-serif">
+                    First Name*
+                  </label>
                   <Input 
-                    id="subject" 
-                    type="text" 
-                    placeholder="Subject of your message" 
-                    className="w-full font-serif font-light"
+                    id="firstName" 
+                    name="firstName"
+                    required
+                    className="w-full border-mono-accent/30 rounded-none font-serif font-light"
                   />
                 </div>
-                
                 <div>
-                  <label htmlFor="message" className="block text-sm mb-2 font-serif text-mono-medium">Message</label>
-                  <Textarea 
-                    id="message" 
-                    placeholder="How can we help you?" 
-                    className="w-full min-h-[150px] font-serif font-light"
+                  <label htmlFor="lastName" className="block text-sm font-medium mb-1 text-mono-medium font-serif">
+                    Last Name*
+                  </label>
+                  <Input 
+                    id="lastName" 
+                    name="lastName"
+                    required
+                    className="w-full border-mono-accent/30 rounded-none font-serif font-light"
                   />
                 </div>
+              </div>
+              
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium mb-1 text-mono-medium font-serif">
+                  Email*
+                </label>
+                <Input 
+                  id="email" 
+                  name="email"
+                  type="email"
+                  required
+                  className="w-full border-mono-accent/30 rounded-none font-serif font-light"
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium mb-1 text-mono-medium font-serif">
+                  Phone
+                </label>
+                <Input 
+                  id="phone" 
+                  name="phone"
+                  type="tel"
+                  className="w-full border-mono-accent/30 rounded-none font-serif font-light"
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium mb-1 text-mono-medium font-serif">
+                  Message*
+                </label>
+                <Textarea 
+                  id="message" 
+                  name="message"
+                  required
+                  className="w-full min-h-[80px] border-mono-accent/30 rounded-none font-serif font-light"
+                />
+              </div>
+              
+              <Button 
+                type="submit" 
+                className="bg-mono-dark hover:bg-mono-medium text-white font-serif font-light flex items-center gap-2 rounded-none"
+              >
+                Send
+                <Send size={16} />
+              </Button>
+            </form>
+          </div>
+          
+          {/* Right Side - Contact Info and Map */}
+          <div className="lg:col-span-6 space-y-6">
+            {/* Contact Card */}
+            <div className="bg-white/95 p-8 rounded-sm shadow-lg animate-fade-in" style={{ animationDelay: "0.1s" }}>
+              <h2 className="text-2xl font-serif font-light mb-6 text-mono-dark border-b pb-2 border-mono-accent/30">
+                Contact
+              </h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-mono-dark">
+                <div className="flex items-start gap-3">
+                  <Mail className="text-mono-medium mt-1" size={18} />
+                  <div>
+                    <p className="font-serif font-light">Email</p>
+                    <a href="mailto:info@mysite.com" className="text-mono-medium hover:text-mono-dark transition-colors font-serif">info@mysite.com</a>
+                  </div>
+                </div>
                 
-                <Button type="submit" className="bg-mono-dark hover:bg-mono-medium text-white font-serif font-light flex items-center gap-2">
-                  Send Message
-                  <Send size={16} />
-                </Button>
-              </form>
+                <div className="flex items-start gap-3">
+                  <Phone className="text-mono-medium mt-1" size={18} />
+                  <div>
+                    <p className="font-serif font-light">Phone</p>
+                    <p className="text-mono-medium font-serif">+1 (415) 555-0123</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <MapPin className="text-mono-medium mt-1" size={18} />
+                  <div>
+                    <p className="font-serif font-light">Location</p>
+                    <p className="text-mono-medium font-serif">123 Design Ave, San Francisco</p>
+                  </div>
+                </div>
+                
+                <div className="mt-2">
+                  <p className="font-serif font-light">Business Hours</p>
+                  <p className="text-mono-medium font-serif">Mon-Fri: 9am - 6pm</p>
+                </div>
+              </div>
             </div>
             
-            {/* Contact Information */}
-            <div className="lg:pl-10">
-              <h2 className="text-2xl font-serif font-light mb-6 text-mono-dark">Contact Information</h2>
-              
-              <div className="space-y-8">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-mono-dark text-white rounded-sm">
-                    <MapPin size={24} />
-                  </div>
-                  <div>
-                    <h3 className="font-serif text-lg font-light">Office Address</h3>
-                    <p className="text-mono-medium font-serif font-light mt-1">
-                      123 Architecture Avenue<br />
-                      San Francisco, CA 94103<br />
-                      United States
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-mono-dark text-white rounded-sm">
-                    <Phone size={24} />
-                  </div>
-                  <div>
-                    <h3 className="font-serif text-lg font-light">Phone Number</h3>
-                    <p className="text-mono-medium font-serif font-light mt-1">
-                      +1 (415) 555-0123<br />
-                      +1 (415) 555-0124
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-mono-dark text-white rounded-sm">
-                    <Mail size={24} />
-                  </div>
-                  <div>
-                    <h3 className="font-serif text-lg font-light">Email Address</h3>
-                    <p className="text-mono-medium font-serif font-light mt-1">
-                      info@designcanvas.com<br />
-                      projects@designcanvas.com
-                    </p>
+            {/* Map */}
+            <div className="h-[220px] bg-white/95 rounded-sm shadow-lg overflow-hidden animate-fade-in" style={{ animationDelay: "0.2s" }}>
+              <div className="w-full h-full bg-[#E8E8E8] relative">
+                {/* Map Placeholder - In a real app, we would integrate an actual map here */}
+                <div className="absolute inset-0 bg-[url('https://api.mapbox.com/styles/v1/mapbox/light-v10/static/-122.431,37.773,13,0/800x400@2x?access_token=placeholder')] bg-cover bg-center">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="bg-mono-dark text-white px-4 py-2 rounded-sm shadow-md">
+                      <p className="font-serif">Our Location</p>
+                    </div>
                   </div>
                 </div>
               </div>
-              
-              {/* Map */}
-              <div className="mt-10 h-[300px] bg-gray-200 relative">
-                <div className="absolute inset-0 flex items-center justify-center text-mono-medium">
-                  Map Placeholder - Google Maps would go here
-                </div>
-              </div>
-              
-              {/* Business Hours */}
-              <div className="mt-10">
-                <h3 className="font-serif text-lg font-light mb-3">Business Hours</h3>
-                <div className="space-y-2 font-serif font-light text-mono-medium">
-                  <div className="flex justify-between">
-                    <span>Monday - Friday</span>
-                    <span>9:00 AM - 6:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Saturday</span>
-                    <span>10:00 AM - 2:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Sunday</span>
-                    <span>Closed</span>
-                  </div>
-                </div>
-              </div>
+            </div>
+            
+            {/* Tagline */}
+            <div className="text-white animate-fade-in" style={{ animationDelay: "0.3s" }}>
+              <h3 className="text-xl font-serif font-light mb-2">Bringing your vision to life</h3>
+              <p className="font-serif font-light text-white/80">
+                Let's collaborate on your next project. Our team is ready to transform your ideas into reality.
+              </p>
             </div>
           </div>
         </div>
