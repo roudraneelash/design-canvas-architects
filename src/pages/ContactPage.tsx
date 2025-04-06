@@ -1,11 +1,10 @@
 
 import React from 'react';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Send, MapPin, Phone, Mail } from 'lucide-react';
+import { Mail, MapPin, Phone } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const ContactPage = () => {
@@ -25,162 +24,150 @@ const ContactPage = () => {
       
       {/* Main Contact Section with Background */}
       <main 
-        className="flex-grow relative bg-cover bg-center"
+        className="flex-grow relative bg-cover bg-center flex items-center"
         style={{
-          backgroundImage: `url("https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=2000&q=80")`,
+          backgroundImage: `url("https://images.unsplash.com/photo-1531971589569-0d9370cbe1e5?auto=format&fit=crop&q=80")`,
         }}
       >
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/70"></div>
         
         {/* Content Container */}
-        <div className="container-custom relative z-10 py-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center h-full">
+        <div className="container mx-auto px-4 relative z-10 py-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
-          {/* Left Side - Contact Form */}
-          <div className="lg:col-span-6 bg-white/95 p-8 rounded-sm shadow-lg animate-fade-in">
-            <h2 className="text-2xl font-serif font-light mb-6 text-mono-dark border-b pb-2 border-mono-accent/30">
-              Get in Touch
-            </h2>
+          {/* Left Side - Heading and Contact Info */}
+          <div className="text-white space-y-10">
+            <div>
+              <p className="text-sm uppercase tracking-wide mb-2">Contact</p>
+              <h1 className="text-6xl font-serif font-light mb-6">Get in Touch</h1>
+            </div>
             
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid grid-cols-2 gap-5">
-                <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium mb-1 text-mono-medium font-serif">
-                    First Name*
-                  </label>
-                  <Input 
-                    id="firstName" 
-                    name="firstName"
-                    required
-                    className="w-full border-mono-accent/30 rounded-none font-serif font-light"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium mb-1 text-mono-medium font-serif">
-                    Last Name*
-                  </label>
-                  <Input 
-                    id="lastName" 
-                    name="lastName"
-                    required
-                    className="w-full border-mono-accent/30 rounded-none font-serif font-light"
-                  />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Phone */}
+              <div className="bg-black/30 backdrop-blur-sm p-6 hover:bg-black/40 transition-colors">
+                <div className="flex flex-col items-start">
+                  <Phone className="mb-4 text-white/70" size={24} />
+                  <h3 className="font-serif text-lg mb-2">Phone</h3>
+                  <a href="tel:+14155550123" className="text-white/80 hover:text-white">
+                    +1 (415) 555-0123
+                  </a>
                 </div>
               </div>
               
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-1 text-mono-medium font-serif">
-                  Email*
-                </label>
-                <Input 
-                  id="email" 
-                  name="email"
-                  type="email"
-                  required
-                  className="w-full border-mono-accent/30 rounded-none font-serif font-light"
-                />
+              {/* Email */}
+              <div className="bg-black/30 backdrop-blur-sm p-6 hover:bg-black/40 transition-colors">
+                <div className="flex flex-col items-start">
+                  <Mail className="mb-4 text-white/70" size={24} />
+                  <h3 className="font-serif text-lg mb-2">Email</h3>
+                  <a href="mailto:info@mysite.com" className="text-white/80 hover:text-white">
+                    info@mysite.com
+                  </a>
+                </div>
               </div>
               
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium mb-1 text-mono-medium font-serif">
-                  Phone
-                </label>
-                <Input 
-                  id="phone" 
-                  name="phone"
-                  type="tel"
-                  className="w-full border-mono-accent/30 rounded-none font-serif font-light"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-1 text-mono-medium font-serif">
-                  Message*
-                </label>
-                <Textarea 
-                  id="message" 
-                  name="message"
-                  required
-                  className="w-full min-h-[80px] border-mono-accent/30 rounded-none font-serif font-light"
-                />
-              </div>
-              
-              <Button 
-                type="submit" 
-                className="bg-mono-dark hover:bg-mono-medium text-white font-serif font-light flex items-center gap-2 rounded-none"
-              >
-                Send
-                <Send size={16} />
-              </Button>
-            </form>
-          </div>
-          
-          {/* Right Side - Contact Info and Map */}
-          <div className="lg:col-span-6 space-y-6">
-            {/* Contact Card */}
-            <div className="bg-white/95 p-8 rounded-sm shadow-lg animate-fade-in" style={{ animationDelay: "0.1s" }}>
-              <h2 className="text-2xl font-serif font-light mb-6 text-mono-dark border-b pb-2 border-mono-accent/30">
-                Contact
-              </h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-mono-dark">
-                <div className="flex items-start gap-3">
-                  <Mail className="text-mono-medium mt-1" size={18} />
-                  <div>
-                    <p className="font-serif font-light">Email</p>
-                    <a href="mailto:info@mysite.com" className="text-mono-medium hover:text-mono-dark transition-colors font-serif">info@mysite.com</a>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <Phone className="text-mono-medium mt-1" size={18} />
-                  <div>
-                    <p className="font-serif font-light">Phone</p>
-                    <p className="text-mono-medium font-serif">+1 (415) 555-0123</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <MapPin className="text-mono-medium mt-1" size={18} />
-                  <div>
-                    <p className="font-serif font-light">Location</p>
-                    <p className="text-mono-medium font-serif">123 Design Ave, San Francisco</p>
-                  </div>
-                </div>
-                
-                <div className="mt-2">
-                  <p className="font-serif font-light">Business Hours</p>
-                  <p className="text-mono-medium font-serif">Mon-Fri: 9am - 6pm</p>
+              {/* Address */}
+              <div className="bg-black/30 backdrop-blur-sm p-6 hover:bg-black/40 transition-colors">
+                <div className="flex flex-col items-start">
+                  <MapPin className="mb-4 text-white/70" size={24} />
+                  <h3 className="font-serif text-lg mb-2">Address</h3>
+                  <p className="text-white/80">
+                    123 Design Ave<br />
+                    San Francisco, CA 94103
+                  </p>
                 </div>
               </div>
             </div>
             
             {/* Map */}
-            <div className="h-[220px] bg-white/95 rounded-sm shadow-lg overflow-hidden animate-fade-in" style={{ animationDelay: "0.2s" }}>
-              <div className="w-full h-full bg-[#E8E8E8] relative">
-                {/* Map Placeholder - In a real app, we would integrate an actual map here */}
-                <div className="absolute inset-0 bg-[url('https://api.mapbox.com/styles/v1/mapbox/light-v10/static/-122.431,37.773,13,0/800x400@2x?access_token=placeholder')] bg-cover bg-center">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="bg-mono-dark text-white px-4 py-2 rounded-sm shadow-md">
-                      <p className="font-serif">Our Location</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="w-full h-[250px] bg-black/30 overflow-hidden relative">
+              <iframe 
+                title="Location Map"
+                className="w-full h-full"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100939.98555098464!2d-122.50764017979172!3d37.75781499657369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1617455214701!5m2!1sen!2sus"
+                loading="lazy"
+              ></iframe>
+              <div className="absolute inset-0 pointer-events-none border border-white/10"></div>
             </div>
+          </div>
+          
+          {/* Right Side - Contact Form */}
+          <div className="bg-white p-8 shadow-lg">
+            <h2 className="text-2xl font-serif font-light mb-2 text-mono-dark">
+              Schedule free
+            </h2>
+            <h3 className="text-3xl font-serif font-light mb-6 text-mono-dark">
+              design consultation
+            </h3>
+            <p className="mb-6 text-mono-medium">
+              Call us directly at <a href="tel:+14155550123" className="text-mono-dark hover:underline">+1 (415) 555-0123</a>, or complete the form below
+            </p>
             
-            {/* Tagline */}
-            <div className="text-white animate-fade-in" style={{ animationDelay: "0.3s" }}>
-              <h3 className="text-xl font-serif font-light mb-2">Bringing your vision to life</h3>
-              <p className="font-serif font-light text-white/80">
-                Let's collaborate on your next project. Our team is ready to transform your ideas into reality.
-              </p>
-            </div>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <Input 
+                  placeholder="Full Name*"
+                  required
+                  className="bg-gray-100 border-0 rounded-none py-3 px-4 text-mono-dark"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <Input 
+                  placeholder="Email Address*"
+                  type="email"
+                  required
+                  className="bg-gray-100 border-0 rounded-none py-3 px-4 text-mono-dark"
+                />
+                
+                <Input 
+                  placeholder="Phone Number*"
+                  type="tel"
+                  required
+                  className="bg-gray-100 border-0 rounded-none py-3 px-4 text-mono-dark"
+                />
+              </div>
+              
+              <div className="grid grid-cols-3 gap-4">
+                <div className="col-span-2">
+                  <Input 
+                    placeholder="Address*"
+                    required
+                    className="bg-gray-100 border-0 rounded-none py-3 px-4 text-mono-dark"
+                  />
+                </div>
+                
+                <Input 
+                  placeholder="ZIP*"
+                  required
+                  className="bg-gray-100 border-0 rounded-none py-3 px-4 text-mono-dark"
+                />
+              </div>
+              
+              <div>
+                <Input 
+                  placeholder="How did you hear about us?*"
+                  required
+                  className="bg-gray-100 border-0 rounded-none py-3 px-4 text-mono-dark"
+                />
+              </div>
+              
+              <div>
+                <Textarea 
+                  placeholder="Tell us a bit about your project!"
+                  className="bg-gray-100 border-0 rounded-none min-h-[120px] py-3 px-4 text-mono-dark"
+                />
+              </div>
+              
+              <Button 
+                type="submit"
+                className="w-full py-6 rounded-none font-serif font-light text-base bg-[#8EBAC5] hover:bg-[#7DA8B3] transition-colors"
+              >
+                Submit
+              </Button>
+            </form>
           </div>
         </div>
       </main>
-      
-      <Footer />
     </div>
   );
 };
