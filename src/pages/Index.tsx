@@ -1,10 +1,10 @@
+
 import React, { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Projects from '@/components/Projects';
 import Services from '@/components/Services';
-import ParallaxDivider from '@/components/ParallaxDivider';
 import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
@@ -61,11 +61,6 @@ const Index = () => {
       <Hero />
       
       <About />
-      
-      <ParallaxDivider 
-        imageUrl="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=1200&q=80"
-        height="h-[250px]"
-      />
       
       <Projects />
       

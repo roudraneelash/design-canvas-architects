@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
@@ -58,57 +59,42 @@ const About = () => {
           ))}
         </div>
 
-        <div className="relative w-full h-[250px] my-20 overflow-hidden">
-          <div 
-            className="absolute inset-0 w-full h-full bg-fixed bg-center bg-cover"
-            style={{ backgroundImage: "url(https://images.unsplash.com/photo-1532680678473-a16f2cda8e43?auto=format&fit=crop&w=1200&q=80)" }}
-          />
-          <div className="absolute inset-0 bg-mono-dark/50" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <h2 className="text-4xl md:text-5xl text-white font-serif font-light tracking-wide animate-on-scroll px-4 text-center">
-              Where Vision Meets Craft
-            </h2>
-          </div>
-        </div>
+        {/* Standard divider instead of parallax */}
+        <div className="my-20 h-[1px] bg-mono-accent/30 w-full"></div>
 
-        <div className="mt-20 relative overflow-hidden">
-          <div className="absolute inset-0 w-full h-full bg-fixed bg-center bg-cover z-[-1]"
-               style={{ backgroundImage: `url(https://images.unsplash.com/photo-1648907736562-b1cb3dd632dd?q=80&w=3173&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)` }} />
-          <div className="absolute inset-0 bg-mono-dark/70 z-[-1]"></div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center p-10 relative z-10">
-            <div className="animate-on-scroll md:order-2">
-              <div className="relative overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?auto=format&fit=crop&w=1200&q=80" 
-                  alt="Architecture studio" 
-                  className="w-full h-auto object-cover"
-                />
-                <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-[#222]/80 to-transparent"></div>
-              </div>
+        {/* Our Story section - restored to previous style without parallax */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center my-20">
+          <div className="animate-on-scroll">
+            <div className="relative overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?auto=format&fit=crop&w=1200&q=80" 
+                alt="Architecture studio" 
+                className="w-full h-auto object-cover"
+              />
+              <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-[#222]/80 to-transparent"></div>
             </div>
-            
-            <div className="animate-on-scroll md:order-1 text-white" style={{ animationDelay: "0.15s" }}>
-              <h2 className="text-3xl md:text-4xl font-light mb-6 font-serif">Our Story</h2>
-              <div className="w-20 h-[1px] bg-white/40 mb-6"></div>
-              <p className="text-white/90 mb-4 font-serif font-light">
-                Founded in 2005 by a collective of forward-thinking architects, Design Canvas emerged from a shared vision to challenge conventional approaches to the built environment. 
-                We've since grown into a dynamic studio of architects, designers, and planners united by a passion for creating meaningful spaces.
-              </p>
-              <p className="text-white/90 mb-6 font-serif font-light">
-                Over the years, we've cultivated a diverse portfolio spanning residential, commercial, cultural, and public projects. 
-                Each design reflects our commitment to innovation, sustainability, and the unique contexts in which our buildings exist.
-              </p>
-              <div className="pl-12 relative group">
-                <span className="absolute left-0 top-0 h-full w-2 bg-[#FFA726]"></span>
-                <a 
-                  href="#projects" 
-                  className="inline-flex items-center font-serif font-light bg-[#333] hover:bg-[#444] text-white hover:text-[#FFA726] transition-all px-8 py-3"
-                >
-                  Explore our work
-                  <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
-                </a>
-              </div>
+          </div>
+          
+          <div className="animate-on-scroll" style={{ animationDelay: "0.15s" }}>
+            <h2 className="text-3xl md:text-4xl font-light mb-6 font-serif text-mono-dark">Our Story</h2>
+            <div className="w-20 h-[1px] bg-mono-accent mb-6"></div>
+            <p className="text-mono-medium mb-4 font-serif font-light">
+              Founded in 2005 by a collective of forward-thinking architects, Design Canvas emerged from a shared vision to challenge conventional approaches to the built environment. 
+              We've since grown into a dynamic studio of architects, designers, and planners united by a passion for creating meaningful spaces.
+            </p>
+            <p className="text-mono-medium mb-6 font-serif font-light">
+              Over the years, we've cultivated a diverse portfolio spanning residential, commercial, cultural, and public projects. 
+              Each design reflects our commitment to innovation, sustainability, and the unique contexts in which our buildings exist.
+            </p>
+            <div className="pl-12 relative group">
+              <span className="absolute left-0 top-0 h-full w-2 bg-[#FFA726]"></span>
+              <a 
+                href="#projects" 
+                className="inline-flex items-center font-serif font-light bg-mono-dark hover:bg-mono-medium text-white hover:text-[#FFA726] transition-all px-8 py-3"
+              >
+                Explore our work
+                <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
+              </a>
             </div>
           </div>
         </div>

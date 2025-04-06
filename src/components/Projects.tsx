@@ -1,9 +1,7 @@
-
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { ArrowRight, Eye, ExternalLink } from 'lucide-react';
+import { Eye, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 type ProjectCategory = 'all' | 'residential' | 'interior' | 'religious' | 'commercial' | 'healthcare';
@@ -159,7 +157,6 @@ const Projects = () => {
     ? allProjects.slice(0, 6)
     : projects[activeCategory]?.slice(0, 6) || [];
 
-  // Stats for achievements section
   const stats = [
     { value: "4+", label: "years of experience" },
     { value: "20+", label: "projects completed" },
@@ -178,7 +175,6 @@ const Projects = () => {
           </p>
         </div>
 
-        {/* Project Categories Filter */}
         <div className="flex flex-wrap justify-center gap-3 mb-10 animate-fade-in" style={{ animationDelay: '0.2s' }}>
           {categories.map((category, index) => (
             <Button
@@ -198,7 +194,6 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* Portfolio Grid - Gallery Style */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {filteredProjects.map((project, index) => (
             <div 
@@ -214,7 +209,6 @@ const Projects = () => {
                 />
               </div>
               
-              {/* Hover overlay */}
               <div className="absolute inset-0 bg-mono-dark/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                 <h3 className="text-xl font-light text-white mb-1 font-serif transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">{project.name}</h3>
                 <p className="text-white/80 font-light font-serif mb-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">{project.location}</p>
@@ -229,10 +223,9 @@ const Projects = () => {
           ))}
         </div>
         
-        {/* View All Projects Button */}
         <div className="flex justify-center mt-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
           <Link 
-            to="/projects" 
+            to="/all-projects" 
             className="group inline-flex items-center px-8 py-3 bg-mono-dark text-white font-light font-serif hover:bg-mono-medium transition-colors duration-300 hover:text-[#FFA726]"
           >
             View All Projects
@@ -240,7 +233,6 @@ const Projects = () => {
           </Link>
         </div>
         
-        {/* Achievements/Stats Section */}
         <div className="mt-24 mb-8 p-12 bg-gradient-to-r from-[#222222] to-[#333333] text-white">
           <h2 className="text-3xl font-light text-white text-center mb-12 font-serif animate-fade-in">Our Achievements</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
