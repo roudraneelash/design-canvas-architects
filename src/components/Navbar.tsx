@@ -55,16 +55,16 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center">
-          <div className="bg-mono-light bg-opacity-90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center">
+          <div className="flex items-center space-x-6">
             {navItems.map((item, index) => (
               <Link 
                 key={index} 
                 to={item.href}
                 className={cn(
-                  "relative font-serif px-6 py-2 mx-1 transition-all duration-300 rounded-full flex items-center gap-2 group",
+                  "relative font-serif px-4 py-2 transition-all duration-300 flex items-center gap-2 group",
                   isActive(item.href) ? 
-                    "bg-mono-dark text-white shadow-md" : 
-                    "hover:bg-mono-light/90"
+                    "text-mono-dark font-medium" : 
+                    "text-mono-medium hover:text-mono-dark"
                 )}
                 onClick={() => setActiveLink(item.href)}
               >
@@ -74,14 +74,11 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
                 )}>
                   {item.icon}
                 </span>
-                <span className={cn(
-                  "transition-all duration-300",
-                  isActive(item.href) ? "font-medium" : "font-light group-hover:font-normal"
-                )}>
+                <span>
                   {item.name}
                 </span>
                 {isActive(item.href) && (
-                  <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-white rounded-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-mono-dark"></span>
                 )}
               </Link>
             ))}
