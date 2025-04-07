@@ -14,200 +14,24 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { Eye, Grid3X3, LayoutGrid } from 'lucide-react';
-
-// This is our project data structure
-interface Project {
-  id: string;
-  name: string;
-  location: string;
-  image: string;
-  description: string;
-  category: string;
-}
+import { projects, categories, ProjectCategory, getAllProjects } from '@/data';
 
 const AllProjectsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [activeCategory, setActiveCategory] = useState<ProjectCategory>('all');
   const itemsPerPage = 9;
 
   // All projects combined from different categories
-  const projects: Project[] = [
-    // Residential projects
-    { 
-      id: 'bungalow-shantiniketan', 
-      name: 'G+1 Bungalow at Shantiniketan', 
-      location: 'West Bengal', 
-      image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=800&q=80',
-      description: 'A contemporary bungalow design that harmonizes with the cultural heritage of Shantiniketan.',
-      category: 'residential'
-    },
-    { 
-      id: 'bungalow-daronda', 
-      name: 'G+1 Bungalow at Daronda', 
-      location: 'West Bengal', 
-      image: 'https://images.unsplash.com/photo-1493397212122-2b85dda8106b?auto=format&fit=crop&w=800&q=80',
-      description: 'Elegant residential design with modern amenities while respecting the local architectural context.',
-      category: 'residential'
-    },
-    { 
-      id: 'bungalow-kolkata', 
-      name: 'G+3 Bungalow at Kolkata', 
-      location: 'West Bengal', 
-      image: 'https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=800&q=80',
-      description: 'Multi-storey residence with spacious interiors and innovative space utilization.',
-      category: 'residential'
-    },
-    { 
-      id: 'apartment-kolkata', 
-      name: 'G+4 Apartment Building at Kolkata', 
-      location: 'West Bengal', 
-      image: 'https://images.unsplash.com/photo-1481026469463-66327c86e544?auto=format&fit=crop&w=800&q=80',
-      description: 'Urban apartment complex with emphasis on community spaces and natural light.',
-      category: 'residential'
-    },
-    { 
-      id: 'residential-chandigarh', 
-      name: 'G+3 Residential Building', 
-      location: 'Chandigarh', 
-      image: 'https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?auto=format&fit=crop&w=800&q=80',
-      description: 'Contemporary residence inspired by the modernist architecture of Chandigarh.',
-      category: 'residential'
-    },
-    
-    // Interior projects
-    { 
-      id: 'interior-southcity', 
-      name: 'Apartment Interior at South City', 
-      location: 'Kolkata', 
-      image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
-      description: 'Luxury apartment interiors with bespoke furniture and high-end finishes.',
-      category: 'interior'
-    },
-    { 
-      id: 'interior-betor', 
-      name: 'Apartment Interior, Betor Heights', 
-      location: 'Howrah, W.B.', 
-      image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80',
-      description: 'Contemporary interior design focusing on space optimization and aesthetic appeal.',
-      category: 'interior'
-    },
-    { 
-      id: 'interior-mayfair', 
-      name: 'Apartment Interiors Mayfair Housing', 
-      location: 'Kolkata', 
-      image: 'https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=800&q=80',
-      description: 'Elegant residential interiors with a blend of classic and contemporary elements.',
-      category: 'interior'
-    },
-    { 
-      id: 'interior-mehrauli', 
-      name: 'G+1 Residential Interiors, Mehrauli', 
-      location: 'New Delhi', 
-      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
-      description: 'Historic district residence with modernized interiors that respect the heritage context.',
-      category: 'interior'
-    },
-    
-    // Religious projects
-    { 
-      id: 'basona-kali-temple', 
-      name: 'Basona Kali Temple', 
-      location: 'Garia, Kolkata', 
-      image: 'https://images.unsplash.com/photo-1518542448-471888cc959d?auto=format&fit=crop&w=800&q=80',
-      description: 'A modern interpretation of traditional temple architecture with sacred geometry.',
-      category: 'religious'
-    },
-    { 
-      id: 'temple-complex', 
-      name: 'Temple Complex & Meditation Hall', 
-      location: 'West Bengal', 
-      image: 'https://images.unsplash.com/photo-1602301129763-de34c3165b7e?auto=format&fit=crop&w=800&q=80',
-      description: 'Comprehensive spiritual complex integrating worship, meditation, and community spaces.',
-      category: 'religious'
-    },
-    { 
-      id: 'ghat-redevelopment', 
-      name: 'Ghat redevelopment', 
-      location: 'Maliandi, W.B.', 
-      image: 'https://images.unsplash.com/photo-1597910037310-375025f42cc2?auto=format&fit=crop&w=800&q=80',
-      description: 'Restoration and enhancement of riverside sacred spaces with improved accessibility.',
-      category: 'religious'
-    },
-    
-    // Commercial projects
-    { 
-      id: 'admin-iocl', 
-      name: 'Admin Building, IOCL, Bottling Plant', 
-      location: 'Kalyani', 
-      image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
-      description: 'Modern administrative facility with efficient workspace planning and sustainable features.',
-      category: 'commercial'
-    },
-    { 
-      id: 'cable-factory', 
-      name: 'Cable Factory', 
-      location: 'Bashanti, South 24 Parganas, W.B.', 
-      image: 'https://images.unsplash.com/photo-1555652736-e92021d28a11?auto=format&fit=crop&w=800&q=80',
-      description: 'Industrial architecture with optimized production flow and worker comfort features.',
-      category: 'commercial'
-    },
-    { 
-      id: 'electrical-substation', 
-      name: 'Electrical Sub Station for WBSEDCL', 
-      location: 'Mohishadal, W.B.', 
-      image: 'https://images.unsplash.com/photo-1626897855769-6e267bd43be4?auto=format&fit=crop&w=800&q=80',
-      description: 'Technical facility with integrated safety systems and efficient operational design.',
-      category: 'commercial'
-    },
-    { 
-      id: 'eco-resort', 
-      name: 'Eco Resort at Taherpur', 
-      location: 'West Bengal', 
-      image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80',
-      description: 'Sustainable hospitality design with minimal environmental footprint and local materials.',
-      category: 'commercial'
-    },
-    { 
-      id: 'facelift-housing', 
-      name: 'Facelift of G+9, Housing', 
-      location: 'Newtown, West Bengal', 
-      image: 'https://images.unsplash.com/photo-1535399280929-c825303205d1?auto=format&fit=crop&w=800&q=80',
-      description: 'Comprehensive facade renovation enhancing aesthetics and thermal performance.',
-      category: 'commercial'
-    },
-    { 
-      id: 'facelift-ranchi', 
-      name: 'Facelift of G+11 Housing, Ranchi Smart City', 
-      location: 'Chattisgarh', 
-      image: 'https://images.unsplash.com/photo-1470723710355-95304d8aece4?auto=format&fit=crop&w=800&q=80',
-      description: 'Smart city residential complex renovation with digital integration and sustainability upgrades.',
-      category: 'commercial'
-    },
-    
-    // Healthcare projects
-    { 
-      id: 'hospital-raigunj', 
-      name: 'Hospital at Raigunj', 
-      location: 'West Bengal', 
-      image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80',
-      description: 'Modern healthcare facility designed for optimal patient care and staff efficiency.',
-      category: 'healthcare'
-    },
-    { 
-      id: 'hospital-chandrakona', 
-      name: 'G+IV Storied Hospital at Chandrakona', 
-      location: 'Paschim Mednipur, W.B.', 
-      image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80',
-      description: 'Multi-specialty healthcare center with focus on healing environments and natural light.',
-      category: 'healthcare'
-    },
-  ];
+  const allProjects = getAllProjects();
+  
+  const filteredProjects = activeCategory === 'all' ? allProjects : projects[activeCategory] || [];
 
   // Calculate pagination
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentProjects = projects.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(projects.length / itemsPerPage);
+  const currentProjects = filteredProjects.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
 
   // Generate page numbers for pagination
   const pageNumbers = [];
@@ -256,6 +80,26 @@ const AllProjectsPage = () => {
               <LayoutGrid className="w-4 h-4 mr-1" /> List
             </Button>
           </div>
+        </div>
+        
+        {/* Project Categories Filter */}
+        <div className="flex flex-wrap justify-center gap-3 mb-12 animate-fade-in">
+          {categories.map((category, index) => (
+            <Button
+              key={category.id}
+              variant="outline"
+              className={cn(
+                "border-mono-accent hover:border-mono-dark font-serif font-light",
+                activeCategory === category.id
+                  ? "bg-mono-dark text-white border-mono-dark"
+                  : "bg-transparent text-mono-medium"
+              )}
+              onClick={() => setActiveCategory(category.id)}
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              {category.label}
+            </Button>
+          ))}
         </div>
         
         {/* Projects Display */}
@@ -316,6 +160,13 @@ const AllProjectsPage = () => {
                 </div>
               </div>
             ))}
+          </div>
+        )}
+        
+        {/* Empty State */}
+        {currentProjects.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-mono-medium font-serif">No projects found in this category.</p>
           </div>
         )}
         
