@@ -1,8 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Home, FolderKanban, MessageSquare } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
+import { navItems } from '@/data';
 
 interface NavbarProps {
   isTransparent?: boolean;
@@ -11,7 +12,6 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeLink, setActiveLink] = useState('/');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,22 +19,11 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
       setScrolled(offset > 50);
     };
 
-    // Update active link based on current path
-    setActiveLink(window.location.pathname);
-
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  const navItems = [
-    { name: "Home", href: "/", icon: <Home size={18} /> },
-    { name: "Projects", href: "/projects", icon: <FolderKanban size={18} /> },
-    { name: "Contact", href: "/contact", icon: <MessageSquare size={18} /> }
-  ];
-
-  const isActive = (path: string) => activeLink === path;
 
   return (
     <header 
@@ -42,7 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isTransparent && !isMenuOpen && !scrolled ? 
           "bg-transparent" : 
-          "bg-white backdrop-blur-md bg-opacity-85 shadow-lg"
+          "bg-white shadow-sm"
       )}
     >
       <div className="container-custom flex justify-between items-center h-20">
@@ -54,44 +43,26 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center">
-          <div className="flex items-center space-x-6">
-            {navItems.map((item, index) => (
-              <Link 
-                key={index} 
-                to={item.href}
-                className={cn(
-                  "relative font-serif px-4 py-2 transition-all duration-300 flex items-center gap-2 group",
-                  isActive(item.href) ? 
-                    "text-mono-dark font-medium" : 
-                    "text-mono-medium hover:text-mono-dark"
-                )}
-                onClick={() => setActiveLink(item.href)}
-              >
-                <span className={cn(
-                  "transition-all duration-300",
-                  isActive(item.href) ? "" : "opacity-70 group-hover:opacity-100"
-                )}>
-                  {item.icon}
-                </span>
-                <span>
-                  {item.name}
-                </span>
-                {isActive(item.href) && (
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-mono-dark"></span>
-                )}
-              </Link>
-            ))}
-          </div>
+        <nav className="hidden md:flex items-center space-x-10">
+          {navItems.map((item, index) => (
+            <Link 
+              key={index} 
+              to={item.href}
+              className={cn(
+                "font-serif font-light hover:opacity-80 transition-opacity animate-border-bottom",
+                isTransparent && !isMenuOpen && !scrolled ? "text-white" : "text-mono-dark"
+              )}
+            >
+              {item.name}
+            </Link>
+          ))}
         </nav>
 
         {/* Mobile Navigation Toggle */}
         <button
           className={cn(
-            "md:hidden p-2 rounded-full focus:outline-none transition-colors",
-            isTransparent && !isMenuOpen && !scrolled ? 
-              "text-white bg-white/20 backdrop-blur-sm" : 
-              "text-mono-dark bg-mono-light/50"
+            "md:hidden p-2 focus:outline-none",
+            isTransparent && !isMenuOpen && !scrolled ? "text-white" : "text-mono-dark"
           )}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
@@ -102,22 +73,19 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
 
       {/* Mobile Menu */}
       <div className={cn(
-        "fixed inset-0 bg-mono-dark z-40 transform transition-transform duration-300",
-        isMenuOpen ? "translate-y-0" : "-translate-y-full"
+        "fixed inset-0 bg-mono-dark z-40 transform transition-transform duration-300 pt-24",
+        isMenuOpen ? "translate-x-0" : "translate-x-full"
       )}>
-        <div className="container-custom flex flex-col items-center justify-center h-full">
-          <nav className="flex flex-col items-center space-y-8 w-full max-w-xs">
+        <div className="container-custom">
+          <nav className="flex flex-col space-y-6 py-10">
             {navItems.map((item, index) => (
               <Link
                 key={index}
                 to={item.href}
-                className="text-white text-2xl font-serif font-light hover:text-gray-300 transition-all flex items-center gap-3 w-full py-3 border-b border-white/10"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  setActiveLink(item.href);
-                }}
+                className="text-white text-2xl font-serif font-light hover:text-gray-300 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <span className="bg-white/10 p-2 rounded-full">{item.icon}</span>
                 {item.name}
               </Link>
             ))}
