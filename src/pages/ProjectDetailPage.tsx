@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { ArrowLeft, Calendar, MapPin, Building } from 'lucide-react';
+import { ArrowLeft, Calendar, MapPin, Building, DollarSign, LayoutGrid } from 'lucide-react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import {
   Carousel,
@@ -22,6 +22,8 @@ const projectsData = [
     location: 'West Bengal', 
     year: '2022',
     client: 'Private',
+    squareFootage: '3,200 sq ft',
+    cost: '₹1.8 Cr',
     description: 'This contemporary bungalow in the cultural town of Shantiniketan blends modern design with traditional Bengali architectural influences. The residence features spacious interiors with double-height living spaces, extensive use of local materials, and climate-responsive design elements that create comfortable living conditions while respecting the local context.',
     challenge: 'The primary challenge was designing a modern home that honors the cultural heritage of Shantiniketan while incorporating contemporary living spaces and amenities. The project also required careful consideration of the tropical climate with hot summers and moderate winters.',
     solution: 'We created a design that incorporates large overhangs and verandas, traditional in Bengali architecture, while using modern construction techniques. The interiors feature locally-sourced materials and craftsmanship, creating a seamless blend of tradition and contemporary design.',
@@ -43,6 +45,8 @@ const projectsData = [
     location: 'West Bengal', 
     year: '2021',
     client: 'Private',
+    squareFootage: '2,800 sq ft',
+    cost: '₹1.5 Cr',
     description: 'Elegant residential design with modern amenities while respecting the local architectural context of Daronda. This spacious bungalow combines practical living spaces with aesthetic design elements.',
     challenge: "Balancing the client's desire for a modern home with the need to respect the local architectural vernacular and climate conditions.",
     solution: 'The design incorporates traditional elements such as courtyards and deep verandahs while using contemporary materials and construction techniques for durability and maintenance.',
@@ -131,50 +135,85 @@ const ProjectDetailPage = () => {
         <Link to="/all-projects" className="text-mono-medium hover:text-mono-dark font-serif flex items-center mb-6 transition-colors">
           <ArrowLeft size={16} className="mr-2" /> Back to All Projects
         </Link>
-        
-        <h1 className="text-4xl md:text-5xl text-mono-dark font-light font-serif mb-4">{project.name}</h1>
-        
-        <div className="flex flex-wrap gap-4 md:gap-8 mb-8">
-          <div className="flex items-center text-mono-medium">
-            <MapPin size={18} className="mr-2" />
-            <span className="font-serif">{project.location}</span>
+      </div>
+      
+      {/* Two-column layout with images on left, details on right */}
+      <div className="container-custom mb-12">
+        <div className="flex flex-col md:flex-row gap-8">
+          {/* Left column - Image grid */}
+          <div className="md:w-1/2">
+            <div className="grid grid-cols-2 gap-3">
+              {allImages.slice(0, 6).map((image: string, index: number) => (
+                <div 
+                  key={index} 
+                  className="aspect-square overflow-hidden cursor-pointer group"
+                  onClick={() => openImageDialog(index)}
+                >
+                  <div className="relative h-full w-full">
+                    <img 
+                      src={image} 
+                      alt={`${project.name} - Image ${index + 1}`} 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
+                      <span className="text-white font-serif text-sm">View</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="flex items-center text-mono-medium">
-            <Calendar size={18} className="mr-2" />
-            <span className="font-serif">{project.year}</span>
-          </div>
-          <div className="flex items-center text-mono-medium">
-            <Building size={18} className="mr-2" />
-            <span className="font-serif">{project.category}</span>
+          
+          {/* Right column - Project details */}
+          <div className="md:w-1/2">
+            <h1 className="text-3xl md:text-4xl text-mono-dark font-light font-serif mb-4">{project.name}</h1>
+            
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="flex items-center text-mono-medium">
+                <MapPin size={16} className="mr-2" />
+                <span className="font-serif">{project.location}</span>
+              </div>
+              <div className="flex items-center text-mono-medium">
+                <Calendar size={16} className="mr-2" />
+                <span className="font-serif">{project.year}</span>
+              </div>
+              <div className="flex items-center text-mono-medium">
+                <Building size={16} className="mr-2" />
+                <span className="font-serif">{project.category}</span>
+              </div>
+              <div className="flex items-center text-mono-medium">
+                <LayoutGrid size={16} className="mr-2" />
+                <span className="font-serif">{project.squareFootage}</span>
+              </div>
+              <div className="flex items-center text-mono-medium">
+                <DollarSign size={16} className="mr-2" />
+                <span className="font-serif">{project.cost}</span>
+              </div>
+            </div>
+
+            <div className="space-y-5 mt-6">
+              <div>
+                <h2 className="text-xl font-light font-serif mb-2 text-mono-dark">Project Overview</h2>
+                <p className="text-mono-medium font-serif leading-relaxed">{project.description}</p>
+              </div>
+              
+              {project.challenge && (
+                <div>
+                  <h3 className="text-lg font-light font-serif mb-2 text-mono-dark">The Challenge</h3>
+                  <p className="text-mono-medium font-serif leading-relaxed">{project.challenge}</p>
+                </div>
+              )}
+              
+              {project.solution && (
+                <div>
+                  <h3 className="text-lg font-light font-serif mb-2 text-mono-dark">Our Solution</h3>
+                  <p className="text-mono-medium font-serif leading-relaxed">{project.solution}</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-      
-      {/* Project Gallery - Centered Grid Layout */}
-      <section className="py-8 bg-white">
-        <div className="container-custom max-w-6xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {allImages.map((image: string, index: number) => (
-              <div 
-                key={index} 
-                className="aspect-square overflow-hidden cursor-pointer group"
-                onClick={() => openImageDialog(index)}
-              >
-                <div className="relative h-full w-full">
-                  <img 
-                    src={image} 
-                    alt={`${project.name} - Image ${index + 1}`} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
-                    <span className="text-white font-serif">View Image</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
       
       {/* Dialog for Image Slideshow */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -202,32 +241,6 @@ const ProjectDetailPage = () => {
           </div>
         </DialogContent>
       </Dialog>
-      
-      {/* Project Description - Simple Section */}
-      <section className="py-8 bg-mono-light">
-        <div className="container-custom max-w-4xl mx-auto">
-          <div className="space-y-6">
-            <div>
-              <h2 className="text-2xl font-light font-serif mb-3 text-mono-dark">Project Overview</h2>
-              <p className="text-mono-medium font-serif leading-relaxed">{project.description}</p>
-            </div>
-            
-            {project.challenge && (
-              <div>
-                <h3 className="text-xl font-light font-serif mb-2 text-mono-dark">The Challenge</h3>
-                <p className="text-mono-medium font-serif leading-relaxed">{project.challenge}</p>
-              </div>
-            )}
-            
-            {project.solution && (
-              <div>
-                <h3 className="text-xl font-light font-serif mb-2 text-mono-dark">Our Solution</h3>
-                <p className="text-mono-medium font-serif leading-relaxed">{project.solution}</p>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
       
       <Footer />
     </div>
