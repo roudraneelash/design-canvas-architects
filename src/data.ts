@@ -1,4 +1,3 @@
-
 import { Home, FolderKanban, MessageSquare } from 'lucide-react';
 import { ReactNode } from 'react';
 
@@ -10,10 +9,7 @@ export interface NavItem {
 
 export const navItems: NavItem[] = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/#about" },
-  { name: "Projects", href: "/projects" },
-  { name: "Services", href: "/#services" },
-  { name: "Team", href: "/#team" },
+  { name: "Projects", href: "/all-projects" },
   { name: "Contact", href: "/contact" },
 ];
 
