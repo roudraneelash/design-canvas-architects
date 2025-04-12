@@ -3,9 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { ArrowLeft, Calendar, MapPin, SquarePen, Building, ArrowRight, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
+import { ArrowLeft, Calendar, MapPin, Building } from 'lucide-react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import {
   Carousel,
@@ -63,7 +61,6 @@ const projectsData = [
 const ProjectDetailPage = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const [project, setProject] = useState<any>(null);
-  const [relatedProjects, setRelatedProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -78,13 +75,6 @@ const ProjectDetailPage = () => {
       
       if (foundProject) {
         setProject(foundProject);
-        
-        // Get related projects
-        const related = foundProject.relatedProjects
-          .map(id => projectsData.find(p => p.id === id))
-          .filter(Boolean);
-        
-        setRelatedProjects(related);
       }
       
       setLoading(false);
@@ -120,7 +110,7 @@ const ProjectDetailPage = () => {
         <div className="flex-grow flex flex-col items-center justify-center text-center p-6">
           <h2 className="text-2xl font-serif font-light mb-4">Project not found</h2>
           <p className="text-mono-medium mb-6">The project you're looking for does not exist or has been removed.</p>
-          <Link to="/projects" className="inline-flex items-center text-mono-dark hover:text-mono-medium transition-colors">
+          <Link to="/all-projects" className="inline-flex items-center text-mono-dark hover:text-mono-medium transition-colors">
             <ArrowLeft size={16} className="mr-2" /> Back to Projects
           </Link>
         </div>
@@ -136,109 +126,38 @@ const ProjectDetailPage = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      {/* Project Hero */}
-      <div className="relative h-[60vh] w-full">
-        <div 
-          className="absolute inset-0 w-full h-full bg-cover bg-center"
-          style={{ 
-            backgroundImage: `url("${project.mainImage}")`,
-            filter: 'brightness(0.7)'
-          }}
-        />
-        <div className="absolute inset-0 bg-black/50" />
+      {/* Project Header */}
+      <div className="container-custom mt-10 mb-8">
+        <Link to="/all-projects" className="text-mono-medium hover:text-mono-dark font-serif flex items-center mb-6 transition-colors">
+          <ArrowLeft size={16} className="mr-2" /> Back to All Projects
+        </Link>
         
-        <div className="container-custom relative z-10 flex flex-col justify-end h-full pb-12">
-          <Link to="/projects" className="text-white/80 hover:text-white font-serif flex items-center mb-6 transition-colors">
-            <ArrowLeft size={16} className="mr-2" /> Back to All Projects
-          </Link>
-          
-          <h1 className="text-4xl md:text-6xl text-white font-light font-serif mb-4">{project.name}</h1>
-          <div className="w-20 h-[1px] bg-white/50 mb-6"></div>
-          
-          <div className="flex flex-wrap gap-4 md:gap-8">
-            <div className="flex items-center text-white/80">
-              <MapPin size={18} className="mr-2" />
-              <span className="font-serif">{project.location}</span>
-            </div>
-            <div className="flex items-center text-white/80">
-              <Calendar size={18} className="mr-2" />
-              <span className="font-serif">{project.year}</span>
-            </div>
-            <div className="flex items-center text-white/80">
-              <Building size={18} className="mr-2" />
-              <span className="font-serif">{project.category}</span>
-            </div>
-            <div className="flex items-center text-white/80">
-              <SquarePen size={18} className="mr-2" />
-              <span className="font-serif">Client: {project.client}</span>
-            </div>
+        <h1 className="text-4xl md:text-5xl text-mono-dark font-light font-serif mb-4">{project.name}</h1>
+        
+        <div className="flex flex-wrap gap-4 md:gap-8 mb-8">
+          <div className="flex items-center text-mono-medium">
+            <MapPin size={18} className="mr-2" />
+            <span className="font-serif">{project.location}</span>
+          </div>
+          <div className="flex items-center text-mono-medium">
+            <Calendar size={18} className="mr-2" />
+            <span className="font-serif">{project.year}</span>
+          </div>
+          <div className="flex items-center text-mono-medium">
+            <Building size={18} className="mr-2" />
+            <span className="font-serif">{project.category}</span>
           </div>
         </div>
       </div>
       
-      {/* Project Description */}
-      <section className="bg-mono-light py-16">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="md:col-span-2 animate-fade-in">
-              <h2 className="text-3xl font-light font-serif mb-6 text-mono-dark">Project Overview</h2>
-              <p className="text-mono-medium font-serif mb-6 leading-relaxed">{project.description}</p>
-              
-              <div className="mt-10">
-                <h3 className="text-2xl font-light font-serif mb-4 text-mono-dark">The Challenge</h3>
-                <p className="text-mono-medium font-serif mb-8 leading-relaxed">{project.challenge}</p>
-                
-                <h3 className="text-2xl font-light font-serif mb-4 text-mono-dark">Our Solution</h3>
-                <p className="text-mono-medium font-serif leading-relaxed">{project.solution}</p>
-              </div>
-            </div>
-            
-            <div className="md:col-span-1 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              <div className="sticky top-24">
-                <h3 className="text-xl font-light font-serif mb-4 text-mono-dark">Project Details</h3>
-                <Separator className="mb-4" />
-                
-                <div className="space-y-4 text-mono-medium font-serif">
-                  <div className="flex justify-between items-center">
-                    <span className="font-light">Location:</span>
-                    <span>{project.location}</span>
-                  </div>
-                  <Separator />
-                  
-                  <div className="flex justify-between items-center">
-                    <span className="font-light">Year:</span>
-                    <span>{project.year}</span>
-                  </div>
-                  <Separator />
-                  
-                  <div className="flex justify-between items-center">
-                    <span className="font-light">Type:</span>
-                    <span>{project.category}</span>
-                  </div>
-                  <Separator />
-                  
-                  <div className="flex justify-between items-center">
-                    <span className="font-light">Client:</span>
-                    <span>{project.client}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Project Gallery - Grid Layout */}
-      <section className="py-16 bg-white">
-        <div className="container-custom">
-          <h2 className="text-3xl font-light font-serif mb-8 text-mono-dark">Project Gallery</h2>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {/* Project Gallery - Centered Grid Layout */}
+      <section className="py-8 bg-white">
+        <div className="container-custom max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {allImages.map((image: string, index: number) => (
               <div 
                 key={index} 
-                className="aspect-square overflow-hidden cursor-pointer group animate-on-scroll"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="aspect-square overflow-hidden cursor-pointer group"
                 onClick={() => openImageDialog(index)}
               >
                 <div className="relative h-full w-full">
@@ -260,15 +179,6 @@ const ProjectDetailPage = () => {
       {/* Dialog for Image Slideshow */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="max-w-5xl bg-black/90 border-none p-0">
-          <Button 
-            variant="outline" 
-            size="icon" 
-            className="absolute right-4 top-4 z-50 rounded-full bg-white/10 hover:bg-white/20 border-none text-white" 
-            onClick={() => setIsDialogOpen(false)}
-          >
-            <X className="h-4 w-4" />
-          </Button>
-          
           <Carousel className="w-full max-h-[80vh]">
             <CarouselContent>
               {allImages.map((image: string, index: number) => (
@@ -293,41 +203,31 @@ const ProjectDetailPage = () => {
         </DialogContent>
       </Dialog>
       
-      {/* Related Projects */}
-      {relatedProjects.length > 0 && (
-        <section className="py-16 bg-mono-dark text-white">
-          <div className="container-custom">
-            <h2 className="text-3xl font-light font-serif mb-8">Related Projects</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedProjects.map((related, index) => (
-                <Link 
-                  to={`/projects/${related.id}`} 
-                  key={index}
-                  className="group animate-on-scroll overflow-hidden"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="aspect-[4/3] overflow-hidden mb-4">
-                    <img 
-                      src={related.mainImage} 
-                      alt={related.name} 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                  </div>
-                  <h3 className="text-xl font-light font-serif group-hover:text-[#9b87f5] transition-colors">{related.name}</h3>
-                  <p className="text-white/70 font-serif">{related.location}</p>
-                </Link>
-              ))}
+      {/* Project Description - Simple Section */}
+      <section className="py-8 bg-mono-light">
+        <div className="container-custom max-w-4xl mx-auto">
+          <div className="space-y-6">
+            <div>
+              <h2 className="text-2xl font-light font-serif mb-3 text-mono-dark">Project Overview</h2>
+              <p className="text-mono-medium font-serif leading-relaxed">{project.description}</p>
             </div>
             
-            <div className="mt-12 flex justify-center">
-              <Link to="/projects" className="inline-flex items-center text-white hover:text-[#9b87f5] transition-colors">
-                View All Projects <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-              </Link>
-            </div>
+            {project.challenge && (
+              <div>
+                <h3 className="text-xl font-light font-serif mb-2 text-mono-dark">The Challenge</h3>
+                <p className="text-mono-medium font-serif leading-relaxed">{project.challenge}</p>
+              </div>
+            )}
+            
+            {project.solution && (
+              <div>
+                <h3 className="text-xl font-light font-serif mb-2 text-mono-dark">Our Solution</h3>
+                <p className="text-mono-medium font-serif leading-relaxed">{project.solution}</p>
+              </div>
+            )}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
       
       <Footer />
     </div>
