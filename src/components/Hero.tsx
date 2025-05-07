@@ -18,22 +18,22 @@ const Hero = () => {
       {/* Improved overlay with gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/40" />
       
-      {/* Content - Centered alignment */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center px-6 md:px-24 z-10 text-center">
+      {/* Content - Left alignment */}
+      <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-24 z-10 text-left">
         <div className="max-w-3xl">
-          <h1 className="text-5xl md:text-7xl font-light text-white tracking-tight font-serif mb-8 animate-fade-in">
-            DESIGN CANVAS ARCHITECTS
+          <h1 className="text-5xl md:text-7xl text-white tracking-tight mb-8 animate-fade-in text-left">
+            <span className="font-helvetica font-black">DESIGN CANVAS</span> <span className="font-helvetica font-medium">ARCHITECTS</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-white/90 font-extralight font-serif mb-12 animate-scale-in text-center" style={{ animationDelay: '0.4s' }}>
+          <p className="text-xl md:text-2xl text-white/90 font-futura font-light mb-12 animate-scale-in text-left" style={{ animationDelay: '0.4s' }}>
             Creating exceptional spaces that inspire, endure, and transform.
           </p>
           
-          <div className="space-x-4 flex items-center justify-center mt-4">
+          <div className="space-x-4 flex items-center mt-4">
             <a 
               href="#projects" 
               className={cn(
-                "px-8 py-3 bg-white text-black font-light rounded-none font-serif",
+                "px-8 py-3 bg-white text-black font-futura font-light rounded-lg",
                 "hover:bg-gray-200 hover:text-[#FFA726] transition-all duration-300 inline-flex items-center"
               )}
             >
@@ -43,7 +43,7 @@ const Hero = () => {
             
             <div className="hidden md:flex items-center">
               <div className="w-12 h-[1px] bg-white/50 mr-3"></div>
-              <a href="#contact" className="text-white hover:text-[#FFA726] transition-colors font-serif">
+              <a href="#contact" className="text-white hover:text-[#FFA726] transition-colors font-futura font-light">
                 Get in Touch
               </a>
             </div>
@@ -51,9 +51,9 @@ const Hero = () => {
         </div>
         
         {/* Scroll Down - Enhanced animation */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center animate-fade-in" style={{ animationDelay: '0.7s' }}>
+        <div className="absolute bottom-10 left-10 flex flex-col items-start animate-fade-in" style={{ animationDelay: '0.7s' }}>
           <a href="#about" className="text-white/80 group flex flex-col items-center">
-            <span className="text-sm mb-2 group-hover:text-[#FFA726] transition-colors font-serif">Scroll</span>
+            <span className="text-sm mb-2 group-hover:text-[#FFA726] transition-colors font-futura font-light">Scroll</span>
             <ArrowDown size={20} className="animate-bounce" />
           </a>
         </div>

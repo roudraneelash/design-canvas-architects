@@ -98,7 +98,11 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif font-light tracking-wide;
+    @apply font-helvetica font-bold tracking-wide text-left;
+  }
+  
+  p, span, div {
+    @apply text-left;
   }
 }
 
@@ -112,7 +116,7 @@
   }
   
   .project-card {
-    @apply relative overflow-hidden;
+    @apply relative overflow-hidden rounded-lg;
   }
   
   .project-card-overlay {
@@ -125,6 +129,15 @@
   
   .animate-on-scroll.in-view {
     @apply opacity-100 translate-y-0;
+  }
+  
+  .highlight-section {
+    @apply bg-black text-white p-6 rounded-lg;
+  }
+  
+  /* Make all buttons have rounded edges */
+  button, .btn, a[role="button"] {
+    @apply rounded-lg;
   }
 }
 
@@ -172,4 +185,3 @@
 .animate-border-bottom:hover:after {
   width: 100%;
 }
-
