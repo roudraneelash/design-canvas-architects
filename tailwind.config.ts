@@ -23,8 +23,6 @@ export default {
 				sans: ['Inter', 'sans-serif'],
 				display: ['Montserrat', 'sans-serif'],
 				serif: ['Playfair Display', 'serif'],
-				futura: ['Futura', 'sans-serif'],
-				helvetica: ['Helvetica', 'Arial', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

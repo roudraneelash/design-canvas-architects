@@ -36,10 +36,10 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
     >
       <div className="container-custom flex justify-between items-center h-20">
         <Link to="/" className={cn(
-          "text-xl transition-colors duration-300",
+          "font-serif font-light text-xl transition-colors duration-300",
           isTransparent && !isMenuOpen && !scrolled ? "text-white" : "text-mono-dark"
         )}>
-          <span className="font-helvetica font-black">DESIGN CANVAS</span> <span className="font-helvetica font-medium">ARCHITECTS</span>
+          DESIGN CANVAS
         </Link>
 
         {/* Desktop Navigation */}
@@ -49,7 +49,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
               key={index} 
               to={item.href}
               className={cn(
-                "font-futura font-light hover:opacity-80 transition-opacity animate-border-bottom text-left",
+                "font-serif font-light hover:opacity-80 transition-opacity animate-border-bottom",
                 isTransparent && !isMenuOpen && !scrolled ? "text-white" : "text-mono-dark"
               )}
             >
@@ -82,7 +82,7 @@ const Navbar: React.FC<NavbarProps> = ({ isTransparent = false }) => {
               <Link
                 key={index}
                 to={item.href}
-                className="text-white text-2xl font-futura font-light hover:text-gray-300 transition-colors text-left"
+                className="text-white text-2xl font-serif font-light hover:text-gray-300 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
