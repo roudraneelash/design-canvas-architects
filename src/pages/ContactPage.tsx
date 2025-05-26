@@ -26,7 +26,8 @@ const ContactPage = () => {
       <main 
         className="flex-grow relative bg-cover bg-center flex items-center"
         style={{
-          backgroundImage: `url("https://images.unsplash.com/photo-1531971589569-0d9370cbe1e5?auto=format&fit=crop&q=80")`,
+          // backgroundImage: `url("https://images.unsplash.com/photo-1531971589569-0d9370cbe1e5?auto=format&fit=crop&q=80")`,
+          backgroundImage: `url("https://images.unsplash.com/photo-1677307816181-1446ab18913e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,
         }}
       >
         {/* Overlay */}

@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Eye, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { projects, categories, stats, ProjectCategory, getAllProjects } from '@/data';
+import { projects, categories, stats, ProjectCategory, getAllProjects } from '../dummy.ts';
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>('all');
@@ -54,7 +54,7 @@ const Projects = () => {
             >
               <div className="aspect-[4/3] overflow-hidden">
                 <img 
-                  src={project.image} 
+                  src={project.mainImage}
                   alt={project.name} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -76,7 +76,7 @@ const Projects = () => {
         
         <div className="flex justify-center mt-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
           <Link 
-            to="/all-projects" 
+            to="/projects"
             className="group inline-flex items-center px-8 py-3 bg-mono-dark text-white font-light font-serif hover:bg-mono-medium transition-colors duration-300 hover:text-[#FFA726]"
           >
             View All Projects
